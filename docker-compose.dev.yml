@@ -1,0 +1,32 @@
+
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"  # Expose Vite dev server
+    volumes:
+      - ./frontend/:/app  # Sync local project files for hot reload
+      - /app/node_modules  # Prevent overwriting container's node_modules
+    
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app 
+      - /app/node_modules
+    ports:
+      - "3001:3001"
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:      

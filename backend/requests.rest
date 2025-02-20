@@ -1,0 +1,54 @@
+# Login request
+POST http://localhost:3001/addUser
+Content-Type: application/json
+
+{
+    "email": "marwane.assou@gmail.com",
+    "first_name":"Marwane",
+    "last_name":"Assou"
+}
+
+####
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+    "email": "marwane.assou@gmail.com"
+}
+
+####
+POST http://localhost:3001/test
+Content-Type: application/json
+
+####
+POST http://localhost:3001/addRoom
+Content-Type: application/json
+
+{
+    "user_id": "32",
+    "channel_rtc": "jdfghfdghdf",
+    "token_rtc": "dfhgfdhjgd",
+    "rtm_channel": "dfjdfgjfhdg",
+    "description": "300",
+    "category":"fdghjfdggd"
+}
+
+####
+GET http://localhost:3001/getRooms
+Content-Type: application/json
+
+{
+    "user_id": "35"
+}
+
+
+
+
+
+
+
+
+
+
+
+
