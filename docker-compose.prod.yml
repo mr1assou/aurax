@@ -2,8 +2,11 @@
 
 services:
   frontend:
-    build:
-      context: ./frontend
+    # when we use github action we remove this
+    # build:
+    #   context: ./frontend
+    # mage from docker registry
+    image: marwane2003/aurax:frontend-latest
     ports:
       - "80:80"  # Expose Vite dev server
     networks:
@@ -11,8 +14,11 @@ services:
     depends_on:
       - backend
   backend:
-    build:
-      context: ./backend
+    # when we use github action we remove this
+    # build:
+    #   context: ./backend
+    # image from docker registry
+    image: marwane2003/aurax:backend-latest
     env_file:
       - .env  # Load environment variables from the .env file
     ports:
