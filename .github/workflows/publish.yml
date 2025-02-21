@@ -27,7 +27,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: itbeeazy/frontend:latest
+          tags: marwane2003/frontend:latest
 
       - name: build and push backend
         uses: docker/build-push-action@v5
@@ -35,9 +35,9 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: itbeeazy/backend:latest
+          tags: marwane2003/backend:latest
           
       # - name: run docker-compose 
       #   run: |
-      
+
       #     docker-compose -f docker-compose.prod.yml up --build -d
