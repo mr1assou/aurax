@@ -1,25 +1,21 @@
 services:
   frontend:
-    # when we use github action we remove this
-    # build:
-    #   context: ./frontend
-    # mage from docker registry
     image: marwane2003/aurax:frontend-latest
+    labels:
+      - com.centurylinklabs.watchtower.enable=true  # ✅ Label added
     ports:
-      - "80:80" # Expose Vite dev server
-    
+      - "80:80"
     networks:
       - prod-network
     depends_on:
       - backend
+
   backend:
-    # when we use github action we remove this
-    # build:
-    #   context: ./backend
-    # image from docker registry
     image: marwane2003/aurax:backend-latest
+    labels:
+      - com.centurylinklabs.watchtower.enable=true  # ✅ Label added
     env_file:
-      - .env # Load environment variables from the .env file
+      - .env
     ports:
       - "3001:3001"
     networks:
@@ -37,20 +33,21 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./mysql/db.sql:/docker-entrypoint-initdb.d/db.sql # SQL import directory
+      - ./mysql/db.sql:/docker-entrypoint-initdb.d/db.sql
       - $HOME/database:/var/lib/mysql
     ports:
       - "3307:3306"
     networks:
       - prod-network
-  # watcher every time the image updated the container laso updated
-  # watchtower:
-  #   image: containrrr/watchtower
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   command: --interval 30 --cleanup --label-enable  
-  #   networks:
-  #   - prod-network
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 --cleanup --label-enable  # ✅ Correct command
+    networks:
+      - prod-network
+    restart: unless-stopped  # ✅ Auto-restart Watchtower
 
 networks:
   prod-network:
