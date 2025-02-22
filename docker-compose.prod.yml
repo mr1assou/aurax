@@ -44,7 +44,17 @@ services:
       - "3307:3306"
     networks:
       - prod-network
-   
+   # watcher every time the image updated the container laso updated
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # Required to interact with Docker
+    command: --interval 60 --cleanup --label-enable  # Check every 1 minutes
+    networks:
+      - prod-network
+
+
 networks:
   prod-network:
     driver: bridge
