@@ -25,7 +25,7 @@ function Header() {
 
   return (
     <div className='flex h-[4%] justify-between items-center '>
-        <h1 className='text-brown font-bold text-center'>A</h1>
+        <h1 className='text-brown font-bold text-center'>Aurax.</h1>
         <div className='flex w-[50%] justify-between xl:w-[20%]'>
             {/* Using NavLink for active link styling */}
             <NavLink 
