@@ -11,7 +11,7 @@ import Profile from './components/Profile/Profile';
 function App() {
 
   return (
-    <div className='bg-black  max-w-[100vw] min-h-screen  p-3 overflow-x-hidden max:px-10 max:py-5'>
+    <div className='bg-white  max-w-[100vw] min-h-screen  p-3 overflow-x-hidden max:px-10 max:py-5'>
       <Router>
         <Header />
         <Routes>
