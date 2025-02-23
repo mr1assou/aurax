@@ -4,7 +4,6 @@ import { createPool, Pool } from "mysql2";
 export class ConnectDatabase {
   public static client: Pool;
   static createConnection(): Pool {
-    console.log("@@@@@@@@@@@ hello guys");
     if (!ConnectDatabase.client) {
       try {
         ConnectDatabase.client = createPool({
