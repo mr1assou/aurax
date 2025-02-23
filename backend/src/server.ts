@@ -26,7 +26,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(userRouter);
 app.use(loginRouter);
-// all routes below middelware we check authorizatio
+// middleware for routes
 app.use(JWTAuthMiddleware.verifyToken);
 app.use(roomRouter);
 app.use(testRouter);
