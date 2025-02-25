@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     credentials: true, 
-    origin: 'http://localhost',  // React app URL
+    origin: 'http://64.227.127.130',  // React app URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 }));
 
