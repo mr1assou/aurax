@@ -3,8 +3,6 @@ services:
     image: marwane2003/aurax:frontend-latest
     labels:
       - com.centurylinklabs.watchtower.enable=true  # ✅ Label added
-    ports:
-      - "80:80"
     networks:
       - prod-network
     depends_on:
@@ -16,8 +14,7 @@ services:
       - com.centurylinklabs.watchtower.enable=true  # ✅ Label added
     env_file:
       - .env
-    ports:
-      - "3001:3001"
+    # here ports proxy will hande it
     networks:
       - prod-network
     depends_on:
@@ -48,7 +45,21 @@ services:
     networks:
       - prod-network
     restart: unless-stopped  # ✅ Auto-restart Watchtower
-
+  reverse-proxy:
+    image: jc21/nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - "80:80"    # HTTP
+      - "443:443"  # HTTPS
+      - "81:81"    # Admin UI
+    volumes:
+      - ./nginx-data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - prod-network
+    depends_on:
+      - frontend
+      - backend
 networks:
   prod-network:
     driver: bridge
