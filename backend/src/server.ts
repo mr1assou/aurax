@@ -15,8 +15,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     credentials: true, 
-    origin: 'http://64.227.127.130',  // React app URL
+    origin: 'http://aurax.ma',  // React app URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add required headers
 }));
 
 
