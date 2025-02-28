@@ -72,16 +72,18 @@ export const VideoRoom = () => {
       client.off('user-left', handleUserLeft);
     };
   }, []);
-  // console.log("users:",users[1].videoTrack);
+  console.log(users);
+  const count = users.filter(item => item.staging ==true).length;
+  console.log("count:",count);
   return (
     <div className='mt-2  h-[90vh] '>
       <div className='flex justify-end items-center gap-1'>
         <p className='text-sm text-brown font-bold'>{users.length}</p>
         <FaRegEye className='text-brown' />
       </div>
-      <div className="mt-5 grid grid-cols-2 ">
+    <div className={`mt-5 h-full flex flex-col gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
         {users.map((user,index) => (
-          user.staging && <VideoPlayer key={index} user={user} length={users.length}/>
+          user.staging && <VideoPlayer key={index} user={user} length={count}/>
         ))}
         <Rtm setUsers={setUsers} user_id={user_id} channel_rtm={channel} token_rtm={token_rtm}/>
       </div>

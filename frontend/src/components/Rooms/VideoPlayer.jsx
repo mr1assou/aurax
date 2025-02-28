@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 export const VideoPlayer = ({ user, length}) => {
+  console.log('length:',length)
   const videoRef = useRef(null);
   useEffect(() => {
     if (!user || !videoRef.current) return;
@@ -13,7 +14,9 @@ export const VideoPlayer = ({ user, length}) => {
         if (videoElement) {
           videoElement.style.width = '100%'; // Full width
           videoElement.style.height = '100%'; // Full height
+          videoElement.style.borderRadius='8px';
           videoElement.style.objectFit = 'cover'; // Ensure video fits the container
+          videoElement.style.border = '3px solid #b87c4c'; // Brown border
           clearInterval(interval); // Stop checking once the video element is styled
         }
       }, 50);
@@ -35,8 +38,13 @@ export const VideoPlayer = ({ user, length}) => {
   return (
     <div
       ref={videoRef}
-      className={`bg-white ${length <= 4 ? 'h-48' : length <= 6 ? 'h-32' : 'h-24'
-        }`}
+      className={`rounded-2xl ${ 
+        length === 2 ? 'h-[40%] w-full' : 
+        length >= 3 ? 'h-[40%] w-[40%]' : 
+        length >= 5 ? 'h-[30%] w-[30%]' : 
+        length >= 7 ? 'h-[20%] w-[20%]' : 
+        'h-[75%] w-full'
+      }`}
     >
     </div>
 

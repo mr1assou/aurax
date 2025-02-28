@@ -89,6 +89,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
       )
     );
   }
+
   return (
     <div className='w-full h-[18%] absolute left-0 bottom-0 flex flex-col justify-between'>
       {/* Wrap messages in a fixed-height container */}
@@ -102,7 +103,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
                   <div className='w-[30px] h-[30px] rounded-full'>
                     <img src={face1} alt="" className='rounded-full object-cover w-full h-full' />
                   </div>
-                  <p className='text-xs font-bold text-white'>
+                  <p className='text-xs font-bold text-brown'>
                     Marwane Assou
                   </p>
                   {
