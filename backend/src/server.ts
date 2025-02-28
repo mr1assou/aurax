@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
     credentials: true, 
-    origin: 'https://aurax.ma',  // React app URL
+    origin: ['https://aurax.ma','http://localhost:5173'],  // React app URL
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Add required headers
 }));
