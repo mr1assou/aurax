@@ -40,9 +40,9 @@ export const VideoPlayer = ({ user, length}) => {
       ref={videoRef}
       className={`rounded-2xl ${ 
         length === 2 ? 'h-[40%] w-full' : 
-        length >= 3 ? 'h-[40%] w-[40%]' : 
-        length >= 5 ? 'h-[30%] w-[30%]' : 
-        length >= 7 ? 'h-[20%] w-[20%]' : 
+        length >= 3 ? 'h-[40%] w-[50%]' : 
+        length >= 5 ? 'h-[30%] w-[50%]' : 
+        length >= 7 ? 'h-[20%] w-[50%]' : 
         'h-[75%] w-full'
       }`}
     >
