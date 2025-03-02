@@ -55,9 +55,13 @@ export const VideoRoom = () => {
       },1000)
     }
   };
-  console.log(users);
+ 
   // this function called a user left the channel for remote user
   const handleUserLeft = (user) => {
+    console.log('user left:',user.uid);
+    setStagedUsers((prevStagedUsers) =>
+      prevStagedUsers.filter((u) => u.uid != user.uid)
+    );
     setUsers((previousUsers) =>
       previousUsers.filter((u) => u.uid !== user.uid)
     );
