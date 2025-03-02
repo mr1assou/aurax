@@ -9,7 +9,7 @@ import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
 
 
-function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
+function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, token_rtm }) {
   const [text, setText] = useState('');
   const [channel, setChannel] = useState();
   // here message of others
@@ -25,11 +25,32 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
       await channel.join();
       // receive messages of remote user
       channel.on('ChannelMessage', (message, memberId) => {
-        if (!message.text.includes("↑"))
+
+        if (message.text === 'Hello guys 👏') {
+            setUsers((prevUsers) => {
+              const stagedUserIds = prevUsers
+                .filter(user => user.staging === true) // Get users where staging is true
+                .map(user => user.uid); // Extract their uid
+              channel.sendMessage({ text: `stagedUsers:${stagedUserIds.join('|')}`, type: 'text' });
+              setMessages(currentMessages => 
+                [...currentMessages, { uid: user_id, text: `stagedUsers:${stagedUserIds.join('|')}` }]);
+              return prevUsers;
+            })
+        }
+        // here set staged users 
+        if(message.text.includes('stagedUsers')){
+          const idsWithPipe=message.text.split(":");
+          const ids=idsWithPipe[1].split('|');
+          const intArray=ids.map(Number);
+          setStagedUsers(intArray);
+        }
+
+        else if (!message.text.includes("↑"))
           setMessages(currentMessages => [...currentMessages, { uid: memberId, text: message.text }]);
         else {
           // Handle arrow messages to update staging status
           const [_, targetUid] = message.text.split(':'); // Extract UID from message
+          console.log("i'm staging i'm user:", targetUid);
           setUsers(prevUsers =>
             prevUsers.map(user =>
               user.uid === parseInt(targetUid)
@@ -51,6 +72,19 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
       client.logout();
     }
   }, [])
+
+  useEffect(() => {
+    const greeting = () => {
+      if (stagedUsers.length === 0 && channel) {
+        channel.sendMessage({ text: 'Hello guys 👏', type: 'text' });
+        setMessages(currentMessages => [...currentMessages, { uid: user_id, text: "Hello guys 👏" }]);
+      }
+    };
+
+    greeting();
+  }, [channel, stagedUsers, user_id]);
+
+
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -77,7 +111,6 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
     channel.sendMessage({ text: '👏', type: 'text' })
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text: "👏" }]);
   }
-
   const showUp = (uid) => {
     channel.sendMessage({ text: `↑:${uid}`, type: 'text' })
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text: `↑:${uid}` }]);
@@ -89,6 +122,9 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm }) {
       )
     );
   }
+
+
+
 
   return (
     <div className='w-full h-[18%] absolute left-0 bottom-0 flex flex-col justify-between'>
