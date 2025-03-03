@@ -4,7 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import axiosInstance from '../Axios';
 import { useNavigate } from 'react-router-dom';
 
-function Authentication({popUp,setPopUp}) {
+function Authentication({popUp,setPopUp,reload,setReload}) {
   const navigate=useNavigate();
   const [signUp, setSignUp] = useState(false);
   const [email, setEmail] = useState("");
@@ -35,6 +35,7 @@ function Authentication({popUp,setPopUp}) {
         await axiosInstance.post('login',{email:email}).then((response)=>{
           // logic i need to go 
           setPopUp(false);
+          setReload(!reload);
           
         }).catch((err)=>{
           setEmptyLogin(false);

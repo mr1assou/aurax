@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
-function Live({ setPopUp }) {
+function Live({ setPopUp , reload}) {
     const navigate=useNavigate();
     const [rooms,setRooms]=useState([]);
 
@@ -37,7 +37,7 @@ function Live({ setPopUp }) {
             }
         };
         fetchRooms();
-    },[])
+    },[reload])
     return (
         <div className='mt-10 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 max:grid-cols-4  gap-4 w-full '>
             {
