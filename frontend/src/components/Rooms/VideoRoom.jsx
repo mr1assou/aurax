@@ -54,6 +54,7 @@ export const VideoRoom = () => {
         })
       },1000)
     }
+    user.audioTrack.play();
   };
  
   // this function called a user left the channel for remote user
@@ -79,6 +80,7 @@ export const VideoRoom = () => {
       .then(([tracks, uid]) => {
         // audio video for each user
         const [audioTrack, videoTrack] = tracks;
+        audioTrack.setEnabled(false);
         setLocalTracks(tracks);
         if (parseInt(uid) === parseInt(channel))
           setUsers((previousUsers) => [...previousUsers, { uid, videoTrack, audioTrack, staging: true }]);
@@ -114,7 +116,8 @@ export const VideoRoom = () => {
           user.staging && <VideoPlayer key={index} user={user} length={count} />
         ))}
         <Rtm stagedUsers={stagedUsers} setStagedUsers={setStagedUsers}
-          setUsers={setUsers} user_id={user_id} channel_rtm={channel} token_rtm={token_rtm} />
+          setUsers={setUsers} user_id={user_id} channel_rtm={channel} token_rtm={token_rtm} 
+          localTracks={localTracks} users={users}/>
       </div>
     </div>
   );

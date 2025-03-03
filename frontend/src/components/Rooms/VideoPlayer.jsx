@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 export const VideoPlayer = ({ user, length}) => {
-  console.log('length:',length)
+  
   const videoRef = useRef(null);
   useEffect(() => {
     if (!user || !videoRef.current) return;
@@ -21,10 +21,6 @@ export const VideoPlayer = ({ user, length}) => {
         }
       }, 50);
     }
-    // Play audio track for local user
-    // if (user.audioTrack) {
-    //   user.audioTrack.play();
-    // }
     // Cleanup function
     return () => {
       if (user.videoTrack) {

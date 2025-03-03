@@ -9,11 +9,14 @@ import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
 
 
-function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, token_rtm }) {
+function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, token_rtm ,localTracks,users}) {
+  
   const [text, setText] = useState('');
   const [channel, setChannel] = useState();
   // here message of others
   const [messages, setMessages] = useState([]);
+  const [mic,setMic]=useState(false);
+
   const uid = String(user_id);
   useEffect(() => {
     const APP_ID = "dca3bcedaaeb4bde9f618461df7f2aff";
@@ -123,7 +126,23 @@ function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, toke
     );
   }
 
+  const microphone=()=>{
+    let count=0;
+    users.forEach((us)=>{
+      if(parseInt(user_id)===parseInt(us.uid) && us.staging){
+        count++;
+      }
+    })
 
+    if(!mic && (stagedUsers.length===0 || count!=0)){
+      localTracks[0].setEnabled(true);
+      setMic(true);
+    }
+    else{
+      localTracks[0].setEnabled(false);
+      setMic(false);
+    }
+  }
 
 
   return (
@@ -170,8 +189,8 @@ function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, toke
           user_id != channel_rtm
           && <FaChildReaching className='text-white text-xl' onClick={stagingRequest} />
         }
-        <CiHeart className='text-white text-xl font-black' />
-        <FaMicrophoneAltSlash className='text-white text-xl' />
+        <FaMicrophoneAltSlash className={`cursor-pointer text-xl ${mic ? 'text-white' : 'text-brown'}`}  onClick={microphone}/>
+        <CiHeart className='text-brown text-xl font-black' />
 
       </form>
     </div>
