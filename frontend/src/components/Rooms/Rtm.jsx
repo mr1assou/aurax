@@ -7,85 +7,97 @@ import { CiHeart } from "react-icons/ci";
 import AgoraRTM from 'agora-rtm-sdk'
 import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
+import AgoraRTC from 'agora-rtc-sdk-ng';
 
+function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUsers,setReload,reload,users}) {
 
-function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, token_rtm ,localTracks,users}) {
-  
   const [text, setText] = useState('');
   const [channel, setChannel] = useState();
   // here message of others
   const [messages, setMessages] = useState([]);
-  const [mic,setMic]=useState(false);
+  const [mic,setMic]=useState(true);
 
   const uid = String(user_id);
   useEffect(() => {
     const APP_ID = "dca3bcedaaeb4bde9f618461df7f2aff";
     const client = AgoraRTM.createInstance(APP_ID);
+  
     const connect = async () => {
-      // here channel rtm is same as uid
-      await client.login({ uid, token: token_rtm })
+      // Log in to the Agora RTM client
+      await client.login({ uid, token: token_rtm });
+  
+      // Create and set up the RTM channel
       const channel = client.createChannel(channel_rtm);
+  
+      // Set up event listeners before joining the channel
+      channel.on('MemberJoined', (memberId) => {
+        if(channel)
+          channel.getMembers().then((members)=>{
+            setTotalUsers(members.length);
+          })
+      });
+  
+      channel.on('MemberLeft', (memberId) => {
+        if(channel)
+          channel.getMembers().then((members)=>{
+            setTotalUsers(members.length);
+          })
+      });
+  
+      // Now join the channel after event listeners are set
       await channel.join();
-      // receive messages of remote user
+     
+  
+      // Set up the 'ChannelMessage' event listener to receive messages
       channel.on('ChannelMessage', (message, memberId) => {
-
-        if (message.text === 'Hello guys 👏') {
-            setUsers((prevUsers) => {
-              const stagedUserIds = prevUsers
-                .filter(user => user.staging === true) // Get users where staging is true
-                .map(user => user.uid); // Extract their uid
-              channel.sendMessage({ text: `stagedUsers:${stagedUserIds.join('|')}`, type: 'text' });
-              setMessages(currentMessages => 
-                [...currentMessages, { uid: user_id, text: `stagedUsers:${stagedUserIds.join('|')}` }]);
-              return prevUsers;
-            })
+        // send message to other users a user join
+        if (message.text.includes('i am user 👏 :')) {
+          setMessages((currentMessages) => [
+            ...currentMessages,
+            { uid: memberId, text: message.text },
+          ]);
         }
-        // here set staged users 
-        if(message.text.includes('stagedUsers')){
-          const idsWithPipe=message.text.split(":");
-          const ids=idsWithPipe[1].split('|');
-          const intArray=ids.map(Number);
-          setStagedUsers(intArray);
-        }
-
-        else if (!message.text.includes("↑"))
+        else if (!message.text.includes('↑')) {
           setMessages(currentMessages => [...currentMessages, { uid: memberId, text: message.text }]);
-        else {
-          // Handle arrow messages to update staging status
-          const [_, targetUid] = message.text.split(':'); // Extract UID from message
-          console.log("i'm staging i'm user:", targetUid);
-          setUsers(prevUsers =>
-            prevUsers.map(user =>
-              user.uid === parseInt(targetUid)
-                ? { ...user, staging: true }
-                : user
-            )
-          );
+        } else {
+          setReload(true);
         }
-
-      })
+      });
+  
       setChannel(channel);
-    }
+    };
+  
     connect();
+  
+    if(parseInt(user_id) != parseInt(channel_rtm)){
+      setMic(false);
+    }
+
 
     return () => {
       if (channel) {
         channel.leave();
       }
       client.logout();
-    }
-  }, [])
+    };
+  }, []);
+  
+  if(channel){
+    channel.getMembers().then((members)=>{
+      setTotalUsers(members.length);
+    })
+  }
 
   useEffect(() => {
     const greeting = () => {
-      if (stagedUsers.length === 0 && channel) {
-        channel.sendMessage({ text: 'Hello guys 👏', type: 'text' });
-        setMessages(currentMessages => [...currentMessages, { uid: user_id, text: "Hello guys 👏" }]);
+      if(channel){
+        channel.sendMessage({ text: `i am user 👏 :${user_id}`, type: 'text' });
+        setMessages(currentMessages => [...currentMessages, { uid: user_id, text: `i am user 👏 :${user_id}` }]);
       }
     };
 
     greeting();
-  }, [channel, stagedUsers, user_id]);
+  }, [channel]);
 
 
 
@@ -133,14 +145,13 @@ function Rtm({ stagedUsers, setStagedUsers, setUsers, user_id, channel_rtm, toke
         count++;
       }
     })
-
-    if(!mic && (stagedUsers.length===0 || count!=0)){
-      localTracks[0].setEnabled(true);
-      setMic(true);
-    }
-    else{
+    if(mic){
       localTracks[0].setEnabled(false);
       setMic(false);
+    }
+    else if(!mic && count!=0){
+      localTracks[0].setEnabled(true);
+      setMic(true);
     }
   }
 
