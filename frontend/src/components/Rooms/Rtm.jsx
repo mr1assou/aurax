@@ -149,7 +149,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
       localTracks[0].setEnabled(false);
       setMic(false);
     }
-    else if(!mic && count!=0){
+    else if(!mic){
       localTracks[0].setEnabled(true);
       setMic(true);
     }
