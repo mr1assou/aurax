@@ -20,18 +20,43 @@ export const VideoRoom = () => {
   const CHANNEL = channel;
   const [users, setUsers] = useState([]);
   const [totalUsers,setTotalUsers] = useState(0);
-  const [cl,setCl]=useState();
   const [reload,setReload]=useState(false);
-
   const [localTracks, setLocalTracks] = useState([]);
+  
   // this function called when a user joined the channel for remote user
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);
-    if (mediaType === 'video') {
-          const userWithTracks = { ...user, videoTrack: user.videoTrack ,audioTrack:user.audioTrack};
-          setUsers((previousUsers) => [...previousUsers, { ...userWithTracks, staging: true }]);
+    
+    // Get the track based on mediaType
+    const track = mediaType === 'video' ? user.videoTrack : user.audioTrack;
+   
+    setUsers((previousUsers) => {
+      const existingUserIndex = previousUsers.findIndex(u => u.uid === user.uid);
+      if (existingUserIndex === -1) {
+        // User doesn't exist, add new user with the current track
+        const newUser = {
+          uid: user.uid,
+          videoTrack: mediaType === 'video' ? track : undefined,
+          audioTrack: mediaType === 'audio' ? track : undefined,
+          staging: true
+        };
+        return [...previousUsers, newUser];
+      } else {
+        // User exists, update the relevant track
+        const updatedUser = {
+          ...previousUsers[existingUserIndex],
+          [mediaType + 'Track']: track
+        };
+        const updatedUsers = [...previousUsers];
+        updatedUsers[existingUserIndex] = updatedUser;
+        return updatedUsers;
+      }
+    });
+    // Play audio immediately if needed
+    if (mediaType === 'audio' && track) {
+      user.audioTrack.play(); // Ensure you have a DOM element for audio
+      console.log('audo track playing:',user.audioTrack);
     }
-    user.audioTrack.play();
   };
  
   // this function called a user left the channel for remote user
@@ -62,13 +87,13 @@ export const VideoRoom = () => {
     }
     else{
       if(!reload){
-        const cl=client
+        client
         .join(APP_ID, CHANNEL, TOKEN, user_id)
-        setCl(cl);
         setUsers((previousUsers) => [...previousUsers, {uid:user_id,videoTrack:"",audioTrack:"", staging: false }]);
       }
       if(reload){
-        cl.then((uid) =>
+        client
+        .join(APP_ID, CHANNEL, TOKEN, user_id).then((uid) =>
           Promise.all([
             AgoraRTC.createMicrophoneAndCameraTracks(),
             uid,
@@ -101,11 +126,12 @@ export const VideoRoom = () => {
       }
       client.off('user-published', handleUserJoined);
       client.off('user-left', handleUserLeft);
+      client.leave();
     };
   }, [reload]);
 
   const count = users.filter(item => item.staging == true).length;
-
+  console.log('users:',users);
   return (
     <div className='mt-2  h-[90vh] '>
       <div className='flex justify-end items-center gap-1'>
