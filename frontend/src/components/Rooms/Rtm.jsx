@@ -7,7 +7,7 @@ import { CiHeart } from "react-icons/ci";
 import AgoraRTM from 'agora-rtm-sdk'
 import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
-import AgoraRTC from 'agora-rtc-sdk-ng';
+
 
 function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUsers,setReload,reload,users}) {
 
@@ -140,16 +140,16 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
 
   const microphone=()=>{
     let count=0;
-    users.forEach((us)=>{
-      if(parseInt(user_id)===parseInt(us.uid) && us.staging){
+    users.forEach(user => {
+      if (user.uid==user_id && user.staging === true) {
         count++;
       }
-    })
+    });
     if(mic){
       localTracks[0].setEnabled(false);
       setMic(false);
     }
-    else if(!mic){
+    else if(!mic && count){
       localTracks[0].setEnabled(true);
       setMic(true);
     }

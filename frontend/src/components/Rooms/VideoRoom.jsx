@@ -23,36 +23,26 @@ export const VideoRoom = () => {
   const [reload, setReload] = useState(false);
   const [localTracks, setLocalTracks] = useState([]);
 
-  // this function called when a user joined the channel for remote user
   const handleUserJoined = async (user, mediaType) => {
+    console.log('remote user',user);
     await client.subscribe(user, mediaType);
-    // Get the track based on mediaType
-    const track = mediaType === 'video' ? user.videoTrack : user.audioTrack;
-    setUsers((previousUsers) => {
-      const existingUserIndex = previousUsers.findIndex(u => u.uid === user.uid);
-      if (existingUserIndex === -1) {
-        const newUser = {
-          uid: user.uid,
-          videoTrack: mediaType === 'video' ? track : undefined,
-          audioTrack: mediaType === 'audio' ? track : undefined,
-          staging: true
-        };
-        return [...previousUsers, newUser];
-      } else {
-        // User exists, update the relevant track
-        const updatedUser = {
-          ...previousUsers[existingUserIndex],
-          [mediaType + 'Track']: track
-        };
-        const updatedUsers = [...previousUsers];
-        updatedUsers[existingUserIndex] = updatedUser;
-        return updatedUsers;
-      }
-    });
-    if(mediaType=='audio'){
-      track.play();
+    if (mediaType === 'video') {
+      const userWithTracks = { ...user, videoTrack: user.videoTrack ,audioTrack:user.audioTrack};
+      setUsers((previousUsers) =>{
+        const existingUserIndex = previousUsers.findIndex(u => u.uid === user.uid);
+        if (existingUserIndex !== -1) {
+          // If user exists, remove the old user and add the updated user object
+          const updatedUsers = [...previousUsers];
+          updatedUsers[existingUserIndex] = { ...userWithTracks, staging: true }; // Replace the existing user
+          return updatedUsers;
+        }
+        else
+          return [...previousUsers, { ...userWithTracks, staging: true }]
+      });
     }
+    user.audioTrack.play();
   };
+
 
   // this function called a user left the channel for remote user
   const handleUserLeft = (user) => {
@@ -61,6 +51,9 @@ export const VideoRoom = () => {
     );
   };
   useEffect(() => {
+    // after the local user join the room we call remote users ok
+    client.on('user-published', handleUserJoined);
+    client.on('user-left', handleUserLeft);
     // join the channel
     if (parseInt(user_id) === parseInt(channel)) {
       client
@@ -74,7 +67,6 @@ export const VideoRoom = () => {
         .then(([tracks, uid]) => {
           // audio video for each user
           const [audioTrack, videoTrack] = tracks;
-          audioTrack.setEnabled(true);
           setLocalTracks(tracks);
           setUsers((previousUsers) => [...previousUsers, { uid, videoTrack, audioTrack, staging: true }]);
           client.publish(tracks);
@@ -111,9 +103,7 @@ export const VideoRoom = () => {
           });
       }
     }
-    // after the local user join the room we call remote users ok
-    client.on('user-published', handleUserJoined);
-    client.on('user-left', handleUserLeft);
+    
     return () => {
       for (let localTrack of localTracks) {
         localTrack.stop();
