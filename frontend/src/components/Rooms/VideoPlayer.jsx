@@ -32,14 +32,14 @@ export const VideoPlayer = ({ user, length}) => {
     };
   }, [user]);
   return (
-    <div
+    <div 
       ref={videoRef}
       className={`rounded-2xl ${ 
-        length === 2 ? 'h-[40%] w-full' : 
-        length >= 3 ? 'h-[40%] w-[50%]' : 
+        length === 2 ? 'h-[40%] w-full max:h-[90%] max:w-[50%]' : 
+        length >= 3 ? 'h-[40%] w-[50%] max:h-[40%] max:w-[45%]' : 
         length >= 5 ? 'h-[30%] w-[50%]' : 
         length >= 7 ? 'h-[20%] w-[50%]' : 
-        'h-[75%] w-full'
+        'h-[75%] w-full max:h-[90%] max:w-full'
       }`}
     >
     </div>

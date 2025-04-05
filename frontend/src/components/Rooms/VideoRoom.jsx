@@ -119,12 +119,11 @@ export const VideoRoom = () => {
   console.log('users:', users);
   return (
     <div className='mt-2  h-[90vh] '>
-
       <div className='flex justify-end items-center gap-1'>
         <p className='text-sm text-brown font-bold'>{totalUsers}</p>
         <FaRegEye className='text-brown' />
       </div>
-      <div className={`mt-5 h-full flex flex-col gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
+      <div className={`mt-5 h-full  max:w-[65%]  flex flex-col max:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
         {users.map((user, index) => (
           user.staging && <VideoPlayer key={index} user={user} length={count} />
         ))}

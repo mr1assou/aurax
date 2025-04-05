@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import image1 from '../../assets/image1.jpg'
 import image2 from '../../assets/image2.jpg'
-import image3 from '../../assets/instrument.jpg'
-import image9 from '../../assets/image7.jpg'
-import piano from '../../assets/piano.jpg'
 import { IoIosEye } from "react-icons/io";
 import axiosInstance from '../../Axios';
 import { useNavigate } from 'react-router-dom';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import face2 from '../../assets/face4.jpg'
-import face1 from '../../assets/face3.jpg'
+import face1 from '../../assets/face1.jpg'
 import { FiSend } from "react-icons/fi";
 import { FaChildReaching } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
@@ -157,9 +156,12 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
 
 
   return (
-    <div className='w-full h-[18%] absolute left-0 bottom-0 flex flex-col justify-between'>
+    <div className='absolute left-0 bottom-0 w-full h-[18%] xl:w-[30%] xl:h-[80%] flex flex-col justify-between 
+               sm:right-5 sm:bottom-0 sm:left-auto'>
+
+
       {/* Wrap messages in a fixed-height container */}
-      <div className='h-[300px] relative'> {/* Added relative positioning */}
+      <div className='h-[300px] xl:h-[90%] relative'> {/* Added relative positioning */}
         <div className='absolute inset-0 overflow-y-auto  '>
 
           <div className='p-2 flex flex-col'>
