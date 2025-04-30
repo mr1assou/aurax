@@ -6,7 +6,7 @@ import Marketplace from './components/Marketplace/Marketplace';
 import DetailsProduct from './components/Marketplace/DetailsProduct';
 import VideoRoom from './components/Rooms/VideoRoom';
 import Profile from './components/Profile/Profile';
-import Events from './components/events/events';
+import Events from './components/events/Events';
 
 
 function App() {
