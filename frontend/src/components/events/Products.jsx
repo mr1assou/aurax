@@ -32,9 +32,9 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event1} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>Soncsophone</p>
+                <p className='text-brown font-black mt-2 text-xs'>Casablanca</p>
                 <div className='flex justify-between items-center mt-1'>
-                    <p className=' text-white font-bold text-xs'>3500 DH</p>
+                    <p className=' text-white font-bold text-xs'>300 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
                 </div>
             </div>
@@ -42,7 +42,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event2} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Agadir</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -52,7 +52,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event3} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Tanger</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -62,7 +62,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event4} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Marrakesh</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -72,7 +72,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event5} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Essaouira</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -82,7 +82,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event6} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Tetouane</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -92,7 +92,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event7} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Rabat</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -102,7 +102,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event8} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>kenitra</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -112,7 +112,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event9} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Agadir</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -122,7 +122,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event10} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Casablanca</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -132,7 +132,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event11} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Fes</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -142,7 +142,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={event12} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Meknes</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
