@@ -6,6 +6,7 @@ import Marketplace from './components/Marketplace/Marketplace';
 import DetailsProduct from './components/Marketplace/DetailsProduct';
 import VideoRoom from './components/Rooms/VideoRoom';
 import Profile from './components/Profile/Profile';
+import Events from './components/events/events';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/detailsProduct" element={<DetailsProduct />} />
           <Route path="/VideoRoom" element={<VideoRoom />} /> 
           <Route path="/profile" element={<Profile />} />
+          <Route path="/events" element={<Events />} />
         </Routes>
       </Router >
     </div>

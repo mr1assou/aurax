@@ -8,7 +8,7 @@ import { Link, NavLink } from 'react-router-dom'; // React Router
 import { LuShoppingCart } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
 import axiosInstance from '../Axios'
-
+import { BiSolidParty } from "react-icons/bi";
 
 
 
@@ -64,12 +64,12 @@ function Header() {
             }
             
             <NavLink 
-              to="/settings" 
+              to="/events" 
               className={({ isActive }) => 
                 isActive ? 'text-brown text-xl' : 'text-white text-xl hover:text-brown transition-transform duration-300'
               }
             >
-              <IoMdSettings />
+              <BiSolidParty />
             </NavLink>
         </div>
     </div>
