@@ -13,15 +13,8 @@ import { BiSolidParty } from "react-icons/bi";
 
 
 function Header() {
-  const [profile,setProfile]=useState(false);
+  const [profile,setProfile]=useState(true);
 
-  useEffect(()=>{
-    axiosInstance.get('test').then((response)=>{
-      setProfile(true);
-    }).catch((err)=>{
-      console.log('user doesn t authenticate yet');
-    })
-  },[profile])
 
   return (
     <div className='flex h-[4%] justify-between items-center '>
