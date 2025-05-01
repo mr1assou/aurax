@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import image2 from '../../assets/image2.jpg'
-import image8 from '../../assets/travel.jpg'
 import image6 from '../../assets/image6.jpg'
+import event1 from '../../assets/event1.jpg'
+import event7 from '../../assets/event7.jpg'
 
 
 const Banner= () => {
   // Using placeholder images since we can't import external images
   const images = [
-    image2,image6,image8
+    event7,image6,event1,image2
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);

@@ -35,7 +35,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Casablanca</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>300 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -45,7 +45,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Agadir</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -55,7 +55,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Tanger</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -65,7 +65,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Marrakesh</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -75,7 +75,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Essaouira</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -85,7 +85,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Tetouane</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -95,7 +95,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Rabat</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -105,7 +105,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>kenitra</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -115,7 +115,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Agadir</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -125,7 +125,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Casablanca</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -135,7 +135,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Fes</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
             <div className="rounded-lg ">
@@ -145,7 +145,7 @@ function Products() {
                 <p className='text-brown font-black mt-2 text-xs'>Meknes</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
-                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
+                    <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Book Now</button>
                 </div>
             </div>
         </div>
