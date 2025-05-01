@@ -3,7 +3,8 @@ import AgoraRTC from 'agora-rtc-sdk-ng';
 import { VideoPlayer } from './VideoPlayer';
 import { FaRegEye } from "react-icons/fa";
 import { useLocation } from 'react-router-dom';
-
+import { RxCross2 } from "react-icons/rx";
+import { Link, NavLink } from 'react-router-dom'; // React Router
 import Rtm from './Rtm';
 
 
@@ -24,11 +25,11 @@ export const VideoRoom = () => {
   const [localTracks, setLocalTracks] = useState([]);
 
   const handleUserJoined = async (user, mediaType) => {
-    console.log('remote user',user);
+    console.log('remote user', user);
     await client.subscribe(user, mediaType);
     if (mediaType === 'video') {
-      const userWithTracks = { ...user, videoTrack: user.videoTrack ,audioTrack:user.audioTrack};
-      setUsers((previousUsers) =>{
+      const userWithTracks = { ...user, videoTrack: user.videoTrack, audioTrack: user.audioTrack };
+      setUsers((previousUsers) => {
         const existingUserIndex = previousUsers.findIndex(u => u.uid === user.uid);
         if (existingUserIndex !== -1) {
           // If user exists, remove the old user and add the updated user object
@@ -103,7 +104,7 @@ export const VideoRoom = () => {
           });
       }
     }
-    
+
     return () => {
       for (let localTrack of localTracks) {
         localTrack.stop();
@@ -119,9 +120,14 @@ export const VideoRoom = () => {
   console.log('users:', users);
   return (
     <div className='mt-2  h-[90vh] '>
+      <div className='flex justify-between mt-4'>
       <div className='flex justify-end items-center gap-1'>
-        <p className='text-sm text-brown font-bold'>{totalUsers}</p>
-        <FaRegEye className='text-brown' />
+          <p className='text-sm text-brown font-bold'>{totalUsers}</p>
+          <FaRegEye className='text-brown' />
+        </div>
+        <Link to="/rooms">
+          <RxCross2 className='text-brown text-3xl font-black'/>
+        </Link>
       </div>
       <div className={`mt-5 h-full  max:w-[65%]  flex flex-col max:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
         {users.map((user, index) => (
