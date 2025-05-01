@@ -33,7 +33,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p2} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>Soncsophone</p>
+                <p className='text-brown font-black mt-2 text-xs'>Guitar</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <Link to="/detailsProduct" className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'  >Details</Link>
@@ -45,7 +45,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p11} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Bass Guitar</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -55,7 +55,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={piano} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Piano</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -65,7 +65,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p1} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Keyboard</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -75,7 +75,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p2} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Cello</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -85,7 +85,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p3} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Harp</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -95,7 +95,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p4} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Organ</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -105,7 +105,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p5} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Recorder</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>
@@ -135,7 +135,7 @@ function Products() {
                 <div className="h-48 max:h-48">
                     <img src={p10} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
-                <p className='text-brown font-black mt-2 text-xs'>guitar</p>
+                <p className='text-brown font-black mt-2 text-xs'>Keyboard</p>
                 <div className='flex justify-between items-center mt-1'>
                     <p className=' text-white font-bold text-xs'>3500 DH</p>
                     <button className='bg-brown text-white px-3 py-2 font-bold rounded-sm text-xs'>Details</button>

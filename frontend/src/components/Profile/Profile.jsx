@@ -8,7 +8,7 @@ function Profile() {
         <div className='mt-5 px-1'>
             
             <UserDetails/>
-            <div className='mt-20'></div>
+            <div className='mt-[150px] md:mt-20'></div>
             <Posts/>
         </div>
     )
