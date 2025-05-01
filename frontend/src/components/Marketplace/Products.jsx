@@ -31,7 +31,7 @@ function Products() {
         <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max:grid-cols-4">
             <div className="rounded-lg ">
                 <div className="h-48 max:h-48">
-                    <img src={image2} alt="" className='w-full h-full object-cover rounded-lg' />
+                    <img src={p2} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
                 <p className='text-brown font-black mt-2 text-xs'>Soncsophone</p>
                 <div className='flex justify-between items-center mt-1'>
@@ -43,7 +43,7 @@ function Products() {
             </div>
             <div className="rounded-lg ">
                 <div className="h-48 max:h-48">
-                    <img src={guitar} alt="" className='w-full h-full object-cover rounded-lg' />
+                    <img src={p11} alt="" className='w-full h-full object-cover rounded-lg' />
                 </div>
                 <p className='text-brown font-black mt-2 text-xs'>guitar</p>
                 <div className='flex justify-between items-center mt-1'>
