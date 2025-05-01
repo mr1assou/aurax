@@ -1,13 +1,13 @@
 import React from 'react';
-import guitar from '../../assets/guitar.jpg';
+import p2 from '../../assets/p2.jpg';
 
 function DetailsProduct() {
   return (
     <div className="mt-5 p-5 max-w-lg mx-auto bg-white rounded-lg shadow-md">
       {/* Product Image */}
-      <div className="h-64 rounded-lg overflow-hidden">
+      <div className="h-96 rounded-lg overflow-hidden">
         <img
-          src={guitar}
+          src={p2}
           alt="Guitar"
           className="w-full h-full object-cover"
         />
