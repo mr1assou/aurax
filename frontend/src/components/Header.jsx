@@ -16,12 +16,12 @@ function Header() {
   const [profile,setProfile]=useState(false);
 
   useEffect(()=>{
-    // axiosInstance.get('test').then((response)=>{
-    //   setProfile(true);
-    // }).catch((err)=>{
-    //   console.log('user doesn t authenticate yet');
-    // })
-  },[])
+    axiosInstance.get('test').then((response)=>{
+      setProfile(true);
+    }).catch((err)=>{
+      console.log('user doesn t authenticate yet');
+    })
+  },[profile])
 
   return (
     <div className='flex h-[4%] justify-between items-center '>
