@@ -22,11 +22,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'], // Add required headers
 }));
 
-app.use('/assets', cors({
-  origin: 'https://aurax.ma',
-  credentials: true,
-}), express.static(path.join(process.cwd(), 'assets')));
-
+app.use('/assets',express.static(path.join(process.cwd(), 'assets')));
 
 
 app.get('/', (req: Request, res: Response) => {
