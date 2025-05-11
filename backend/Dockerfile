@@ -41,6 +41,7 @@ WORKDIR /app
 
 # Copy compiled JavaScript from the build stage
 COPY --from=build /app/dist /app/dist
+COPY --from=build /app/assets /app/assets
 # Install production dependencies
 COPY package*.json ./
 RUN npm install --only=production
