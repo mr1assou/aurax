@@ -191,7 +191,7 @@ function Post({ post }) {
             <p className="text-gray-800 mb-4">{post.description}</p>
             {post.path_image !== "assets/undefined" && (
               <img
-                src={`https://dhfghdfdhjgdfhjg.aurax.ma/${post.path_image}`}
+                src={`http://localhost:3001/${post.path_image}`}
                 alt="Post"
                 className="rounded-lg w-full max-h-80 object-cover mb-4"
               />
