@@ -19,10 +19,10 @@ function Header() {
   return (
     <div className='flex h-[4%] justify-between items-center '>
         <h1 className='text-brown font-bold text-center'>Aurax.</h1>
-        <div className='flex w-[50%] justify-between xl:w-[20%]'>
+        <div className='flex w-[60%] justify-between xl:w-[20%]'>
             {/* Using NavLink for active link styling */}
             <NavLink 
-              to="/" 
+              to="/home" 
               className={({ isActive }) => 
                 isActive ? 'text-brown text-xl' : 'text-white text-xl hover:text-brown transition-transform duration-300'
               }

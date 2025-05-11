@@ -41,6 +41,17 @@ Content-Type: application/json
     "user_id": "35"
 }
 
+####
+POST http//localhost:3001/addPost
+Content-Type: application/json
+
+{
+    "post_id": 32,
+    "user_id": 5,
+    "description": "300",
+    "path_image":"fdghjfdggd"
+}
+
 
 
 

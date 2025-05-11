@@ -7,25 +7,25 @@ import DetailsProduct from './components/Marketplace/DetailsProduct';
 import VideoRoom from './components/Rooms/VideoRoom';
 import Profile from './components/Profile/Profile';
 import Events from './components/events/Events';
-
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
 
   return (
-    <div className='bg-black  max-w-[100vw] min-h-screen  p-3 overflow-x-hidden max:px-10 max:py-5'>
       <Router>
-        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/marketplace" element={<Marketplace />} />
-          <Route path="/detailsProduct" element={<DetailsProduct />} />
-          <Route path="/VideoRoom" element={<VideoRoom />} /> 
+          <Route path="/" element={<Login />} />
+          <Route path="/sign_up" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/rooms" element={<><Header /><Rooms /></>} />
+          <Route path="/marketplace" element={<><Header /><Marketplace /></>} />
+          <Route path="/detailsProduct" element={<><Header /><DetailsProduct /></>} />
+          <Route path="/VideoRoom" element={<><Header /><VideoRoom /></>} /> 
           <Route path="/profile" element={<Profile />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/events" element={<><Header /><Events /></>} />
         </Routes>
       </Router >
-    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import image2 from '../../assets/image2.jpg'
+import image2 from '/assets/login_image.jpg'
 import { IoIosEye } from "react-icons/io";
 import axiosInstance from '../../Axios';
 import { useNavigate } from 'react-router-dom';

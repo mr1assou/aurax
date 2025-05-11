@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import image2 from '../../assets/image2.jpg'
-import image6 from '../../assets/image6.jpg'
-import event1 from '../../assets/event1.jpg'
-import event7 from '../../assets/event7.jpg'
+import image2 from '/assets/login_image.jpg'
+import image6 from '/assets/login_image.jpg'
+import event1 from '/assets/login_image.jpg'
+import event7 from '/assets/login_image.jpg'
 
 
 const Banner= () => {

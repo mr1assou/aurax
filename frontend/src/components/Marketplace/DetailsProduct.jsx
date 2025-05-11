@@ -1,5 +1,4 @@
-import React from 'react';
-import p2 from '../../assets/p2.jpg';
+
 
 function DetailsProduct() {
   return (
@@ -7,7 +6,7 @@ function DetailsProduct() {
       {/* Product Image */}
       <div className="h-96 rounded-lg overflow-hidden">
         <img
-          src={p2}
+          src="/assets/login_image.jpg"
           alt="Guitar"
           className="w-full h-full object-cover"
         />

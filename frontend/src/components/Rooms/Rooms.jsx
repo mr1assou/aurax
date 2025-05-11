@@ -3,7 +3,6 @@ import Categories from './Categories'
 import Banner from './Banner'
 import Live from './Lives'
 import { useState } from 'react'
-import Authentication from '../Authentication';
 
 import AddRoom from './AddRoom'
 import RoomForm from './RoomForm'
@@ -15,7 +14,7 @@ function Rooms() {
 
   return (
     <div className='mt-5 w-full overflow-x-hidden'>
-      <Authentication popUp={popUp} setPopUp={setPopUp} reload={reload} setReload={setReload}/>
+      {/* <Authentication popUp={popUp} setPopUp={setPopUp} reload={reload} setReload={setReload}/> */}
       <RoomForm roomForm={roomForm} setRoomForm={setRoomForm}/>
       <Banner />
       <Categories />

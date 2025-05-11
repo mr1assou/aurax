@@ -1,15 +1,16 @@
 import React from 'react'
 
 import UserDetails from './UserDetails'
-import Posts from '../Home/Posts'
+import Header from '../Header'
+import Wrapper from './Wrapper'
 
 function Profile() {
     return (
-        <div className='mt-5 px-1'>
-            
+        <div className='w-full  bg-black py-3 px-2 lg:py-5 lg:px-10 min-h-screen'> 
+            <Header /> 
             <UserDetails/>
-            <div className='mt-[150px] md:mt-20'></div>
-            <Posts/>
+            <div className='mt-[200px] md:mt-20'></div>
+            <Wrapper />
         </div>
     )
 }

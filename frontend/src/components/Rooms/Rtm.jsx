@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import face1 from '../../assets/face1.jpg'
+import face1 from '/assets/login_image.jpg'
 import { FiSend } from "react-icons/fi";
 import { FaChildReaching } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";

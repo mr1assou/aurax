@@ -7,6 +7,8 @@ import testRouter from './routes/test';
 import cors from 'cors';
 import JWTAuthMiddleware from './utils/jwt_middelware';
 import roomRouter from './routes/roomRoute';
+import postRouter from './routes/postRoute';
+import path from 'path';
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Add required headers
 }));
+app.use('/assets', express.static(path.join(process.cwd(), 'assets')));
 
 
 app.get('/', (req: Request, res: Response) => {
@@ -30,6 +33,7 @@ app.use(loginRouter);
 // middleware for routes
 app.use(JWTAuthMiddleware.verifyToken);
 app.use(roomRouter);
+app.use(postRouter);
 app.use(testRouter);
 
 app.listen(3001,'0.0.0.0');
