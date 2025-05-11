@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaRegHeart, FaHeart, FaRegComments, FaRegShareSquare } from 'react-icons/fa';
 import { CiLocationArrow1 } from "react-icons/ci";
 import axiosInstance from '../../Axios';
+import imageLink from '../ImageLink';
 
 function Post({ post }) {
   const [liked, setLiked] = useState(false);
