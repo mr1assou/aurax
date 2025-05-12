@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Products from './Products';
+import Header from '../Header';
 
 function Marketplace() {
     const [selectedCountry, setSelectedCountry] = useState("Argentina");
@@ -20,8 +21,9 @@ function Marketplace() {
     };
 
     return (
-        <div className="mt-5">
-            <p className="text-white">Filter by:</p>
+         <div className='w-full  bg-black py-3 px-2 lg:py-5 lg:px-10 min-h-screen'>
+            <Header />
+            <p className="text-white mt-5">Filter by:</p>
             <div className="mt-2 flex gap-2 flex-wrap justify-center sm:justify-start sm:items-center sm:text-sm ">
                 <select
                     value={selectedCountry}

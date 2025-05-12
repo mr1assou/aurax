@@ -10,7 +10,7 @@ export class LoginService {
         if (response !=0) {
             const secretKey = process.env.ACCESS_TOKEN_SECRET;
             if (!secretKey) throw new Error('ACCESS_TOKEN_SECRET not configured');
-            const accessToken = jwt.sign({user_id, email, first_name, last_name}, secretKey, { expiresIn: '1h' });
+            const accessToken = jwt.sign({user_id, email, first_name, last_name}, secretKey, { expiresIn: '730d' }); // two years
             return { success: true, token: accessToken };
         }
         return { success: false, message: 'Login failed' };

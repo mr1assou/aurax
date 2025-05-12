@@ -12,4 +12,8 @@ export class userService {
         const res= await this.adminUserRepository.addUser(data);
         return res;
     }
+    async getUser(data: any) : Promise<string>{
+        const res= await this.adminUserRepository.getUser(data);
+        return res;
+    }
 }

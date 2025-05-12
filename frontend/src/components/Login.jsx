@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RxCross1 } from "react-icons/rx";
 import axiosInstance from '../Axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 
 function Login({ popUp, setPopUp, reload, setReload }) {
   const navigate = useNavigate();
@@ -10,6 +11,20 @@ function Login({ popUp, setPopUp, reload, setReload }) {
   const [password, setPassword] = useState("");
   const [emptyLogin, setEmptyLogin] = useState(false);
   const [loginCredentials, setLoginCredentials] = useState(false);
+
+  useEffect(() => {
+    // Check cookies
+    const checkUser=async ()=>{
+     const response=await axiosInstance.get('test');
+      if(response.data){
+        console.log('@@@@@@');
+        navigate('/home');
+      }
+    }
+    checkUser();
+  }, [])
+
+
 
   const login = async (e) => {
     e.preventDefault();
@@ -34,7 +49,7 @@ function Login({ popUp, setPopUp, reload, setReload }) {
   };
   return (
     <div className='relative h-screen  flex justify-center items-center '>
-      <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
+      <img src="/assets/event7.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
 
       <div className='absolute bg-opacity-50 w-[85%] max:w-[30%]  rounded-lg p-5 bg-white mb-10'>
         <div className='flex justify-between items-center'>
@@ -66,10 +81,10 @@ function Login({ popUp, setPopUp, reload, setReload }) {
             />
           </div>
           <div className='flex justify-between w-full items-center mt-10'>
-             <Link to="/sign_up" className="text-brown font-bold" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>Sign up</Link>
+            <Link to="/sign_up" className="text-brown font-bold" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}>Sign up</Link>
             <button
               type="submit" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.4)' }}
-              className="ml-2 font-bold px-4 py-1 max:py-2  hover:text-white " 
+              className="ml-2 font-bold px-4 py-1 max:py-2  hover:text-white "
             >
               Login
             </button>

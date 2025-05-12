@@ -4,24 +4,25 @@ import piano from '/assets/login_image.jpg'
 import { IoMdStar } from "react-icons/io";
 import { IoMdStarHalf } from "react-icons/io";
 import axiosInstance from '../../Axios';
+import { useParams } from 'react-router-dom';
 
 
-function UserDetails() {
-    const [user,setUser]=useState([]);
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await axiosInstance.get('test');
-                setUser(response.data);
-            } catch (error) {
-                console.error('Upload error:', error);
-            }
-        };
-
-        fetchPosts();
-    }, []);
-    console.log('user:',user);
+function UserDetails({}) {
+    const { id } = useParams(); 
+    const [user,setUser]=useState();
+    useEffect(()=>{
+        const fetchData=async ()=>{
+             const response = await axiosInstance.get('/getUser', {
+                params: { user_id: id}
+            });
+            setUser(response.data[0]);
+        }
+        fetchData();
+    },[]);
+    
+    
+    
 
     return (
         <div className='h-96  w-  rounded-lg relative py-5 '>
@@ -31,7 +32,7 @@ function UserDetails() {
                     <img src={piano} alt="" className='rounded-full w-full h-full object-cover' />
                 </div>
                 <div>
-                    <p className='text-white mt-2 text-lg'>{user.first_name} {user.last_name}</p>
+                    <p className='text-white mt-2 text-lg'>{user?.first_name} {user?.last_name}</p>
                     <p className="text-white w-[80%] text-lg mt-2">
                         🎵 I'm a passionate musician dedicated to creating meaningful and soulful sounds. Whether it's composing, performing, or collaborating.
 

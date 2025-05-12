@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import image2 from '/assets/login_image.jpg'
-import image6 from '/assets/login_image.jpg'
-import event1 from '/assets/login_image.jpg'
-import event7 from '/assets/login_image.jpg'
+import image2 from '/assets/event1.jpg'
+import image6 from '/assets/image2.jpg'
+import event1 from '/assets/event2.jpg'
+import event7 from '/assets/event5.jpg'
 
 
 const Banner= () => {
@@ -36,7 +36,7 @@ const Banner= () => {
   }, [moveToNextSlide]);
 
   return (
-    <div className="relative w-full h-32 xs:h-64 lg:h-96 overflow-hidden mt-5 ">
+    <div className="relative w-full h-32 xs:h-64 max:h-[500px] 3xl:[700px] overflow-hidden mt-5 ">
       <div
         className={`flex h-full ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
         style={{

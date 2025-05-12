@@ -26,7 +26,8 @@ export class PostController {
     async addComment(req: Request, res: Response, next: NextFunction): Promise<any> {
         try {
             const data=req.body;
-            const result = await this.PostService.addComment(data);
+            const user_id=req.user.user_id;
+            const result = await this.PostService.addComment({...data,user_id:user_id});
             return res.status(200).json({ data: req.body});
         } catch (err) {
             next(err);
@@ -48,6 +49,16 @@ export class PostController {
             const user_id=req.user.user_id;
             const result = await this.PostService.sharePost({user_id,description,path_image});
             return res.status(200).json({ message: 'Post added successfully' });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async getPostsById(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            const data=req.query.user_id;
+            const result = await this.PostService.getPostsById(data);
+            return res.status(200).json({ data: result});
         } catch (err) {
             next(err);
         }

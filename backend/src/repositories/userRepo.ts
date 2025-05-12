@@ -17,4 +17,14 @@ export class userRepo {
             return "user already exist"; // Return false in case of an error
         }
     }
+    async getUser(data: any) : Promise<any> {
+        try {
+            // Use await with the query
+            const result=await this.connectionDb.promise().query(`CALL get_user(?)`, [data]);
+            const user:any=result[0];
+            return user[0]; // Return true if no error
+        } catch (err) {
+            return "user already exist"; // Return false in case of an error
+        }
+    }
 }

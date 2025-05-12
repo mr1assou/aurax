@@ -16,4 +16,14 @@ export class userController {
             next(err);
         }
     }
+    async getUser(req: Request, res: Response, next: NextFunction): Promise<any> {
+        try {
+            const {user_id}:any=req.query;
+            const value = await this.adminUserService.getUser(user_id);
+            return res.json(value );
+        }
+        catch (err) {
+            next(err);
+        }
+    }
 }

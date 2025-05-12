@@ -14,9 +14,9 @@ export const VideoPlayer = ({ user, length}) => {
         if (videoElement) {
           videoElement.style.width = '100%'; // Full width
           videoElement.style.height = '100%'; // Full height
-          videoElement.style.borderRadius='8px';
+          videoElement.style.borderRadius='0px';
           videoElement.style.objectFit = 'cover'; // Ensure video fits the container
-          videoElement.style.border = '3px solid #b87c4c'; // Brown border
+          videoElement.style.border = '2px solid #b87c4c'; // Brown border
           clearInterval(interval); // Stop checking once the video element is styled
         }
       }, 50);

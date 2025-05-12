@@ -262,7 +262,6 @@ CREATE PROCEDURE `getRooms`(
 BEGIN
     SELECT room_id, user_id, channel, description, category
     FROM rooms
-    WHERE user_id != p_user_id;
 END$$
 DELIMITER ;
 
@@ -345,3 +344,43 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- ===========================
+-- Procedure: get_user
+-- ===========================_
+DELIMITER $$
+
+CREATE PROCEDURE get_user(IN id INT)
+BEGIN
+    SELECT first_name, last_name
+    FROM users
+    WHERE user_id = id;
+END$$
+
+DELIMITER ;
+
+-- ===========================
+-- Procedure: get_posts_by_id
+-- ===========================
+DELIMITER $$
+
+CREATE PROCEDURE get_posts_by_id(IN p_user_id INT)
+BEGIN
+    SELECT 
+        posts.post_id,
+        users.first_name,
+        users.last_name,
+        posts.description,
+        posts.path_image,
+        posts.created_at,
+        users.user_id
+    FROM 
+        posts
+    INNER JOIN 
+        users ON posts.user_id = users.user_id
+    WHERE 
+        users.user_id = p_user_id
+    ORDER BY 
+        posts.created_at DESC;
+END$$
+
+DELIMITER ;

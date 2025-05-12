@@ -56,4 +56,13 @@ export class PostRepo {
             return "error to add post"; 
         }
     }
+    async getPostSById(data: any): Promise<any> {
+        try {
+            const result = await this.connectionDb.promise().query(`CALL get_posts_by_id(?)`, [data]);
+            const posts:any=result[0];
+            return posts[0]; 
+        } catch (err) {
+            return "error to add post"; 
+        }
+    }
 }

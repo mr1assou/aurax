@@ -172,7 +172,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
                     <img src={face1} alt="" className='rounded-full object-cover w-full h-full' />
                   </div>
                   <p className='text-xs font-bold text-brown'>
-                    Marwane Assou
+                    You
                   </p>
                   {
                     message.text === "👏" && user_id == channel_rtm && <FaHandsClapping className='text-white' onClick={() => showUp(message.uid)} />

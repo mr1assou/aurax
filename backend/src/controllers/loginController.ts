@@ -11,7 +11,7 @@ export class LoginController {
             if (result.success) {
                 res.cookie('accessToken', result.token, {
                     httpOnly: true,
-                    maxAge: 3600000, // 1 hour
+                    maxAge: 63072000000, // 2 years
                     sameSite: false,
                 });
                 return res.json({ success: true, message: "Login successful" });

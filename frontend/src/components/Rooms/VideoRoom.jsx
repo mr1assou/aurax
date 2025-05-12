@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { RxCross2 } from "react-icons/rx";
 import { Link, NavLink } from 'react-router-dom'; // React Router
 import Rtm from './Rtm';
-
+import Header from '../Header';
 
 const client = AgoraRTC.createClient({
   mode: 'rtc',
@@ -119,7 +119,9 @@ export const VideoRoom = () => {
   const count = users.filter(item => item.staging == true).length;
   console.log('users:', users);
   return (
-    <div className='mt-2  h-[90vh] '>
+    <div className='w-full  bg-black py-3 px-2 lg:py-5 lg:px-10 min-h-screen'>
+    <Header />
+    <div className='mt-2  h-[90vh]'>
       <div className='flex justify-between mt-4'>
       <div className='flex justify-end items-center gap-1'>
           <p className='text-sm text-brown font-bold'>{totalUsers}</p>
@@ -136,6 +138,7 @@ export const VideoRoom = () => {
         <Rtm setUsers={setUsers} user_id={user_id} channel_rtm={channel} token_rtm={token_rtm}
           localTracks={localTracks} setTotalUsers={setTotalUsers} setReload={setReload} reload={reload} users={users} />
       </div>
+    </div>
     </div>
   );
 };

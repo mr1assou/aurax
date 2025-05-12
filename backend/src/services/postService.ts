@@ -31,4 +31,7 @@ export class PostService {
         this.postRepository.sharePost({user_id,description,path_image});
         return "good";
     }
+    async getPostsById(data: any) : Promise<string>{
+        return this.postRepository.getPostSById(data);
+    }
 }

@@ -1,24 +1,25 @@
 import Post from "./Post";
 import axiosInstance from "../../Axios";
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 
-function Posts({reload}) {
+function Posts({ reload}) {
   const [posts, setPosts] = useState([]); // using 'any' for simplicity
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axiosInstance.get('/getPosts');
-        setPosts(response.data.data);
-      } catch (error) {
-        console.error('Upload error:', error);
-      }
-    };
+  const { id } = useParams();
 
-    fetchPosts();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axiosInstance.get('/getPostsById', {
+        params: { user_id: id }
+      });
+      setPosts(response.data.data);
+    }
+    fetchData();
   }, [reload]);
+
   return (
     <div>
-      {posts.length>0 &&  posts.map((post) => (
+      {posts.length > 0 && posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
     </div>

@@ -62,11 +62,11 @@ function RoomForm({ roomForm, setRoomForm }) {
                                 onChange={handleInputChange}
 
                             >
-                                <option value="Piano" className="inline p-0 text-[3px]">Piano</option>
-                                <option value="Opera" className="inline p-0 text-[3px]">Opera</option>
-                                <option value="Jazz" className="inline p-0 text-[3px]">Jazz</option>
-                                <option value="Rock" className="inline p-0 text-[3px]">Rock</option>
-                                <option value="Pop" className="inline p-0 text-[3px]">Pop</option>
+                                <option value="Piano" className="inline p-0 text-[20px]">Piano</option>
+                                <option value="Opera" className="inline p-0 text-[20px]">Opera</option>
+                                <option value="Jazz" className="inline p-0 text-[20px]">Jazz</option>
+                                <option value="Rock" className="inline p-0 text-[20px]">Rock</option>
+                                <option value="Pop" className="inline p-0 text-[20px]">Pop</option>
                             </select>
 
                             <button onClick={handleSubmit}

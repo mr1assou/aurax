@@ -3,6 +3,7 @@ import { FaRegHeart, FaHeart, FaRegComments, FaRegShareSquare } from 'react-icon
 import { CiLocationArrow1 } from "react-icons/ci";
 import axiosInstance from '../../Axios';
 import imageLink from '../ImageLink';
+import { Link } from 'react-router-dom';
 
 function Post({ post }) {
   const [liked, setLiked] = useState(false);
@@ -46,7 +47,6 @@ function Post({ post }) {
       try {
         await axiosInstance.post('/addComment', {
           post_id: post.post_id,
-          user_id: post.user_id,
           comment: comment
         });
         setComment("");
@@ -74,10 +74,10 @@ function Post({ post }) {
           <div className="w-10 h-10 rounded-full overflow-hidden">
             <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
           </div>
-          <div className="ml-3 flex flex-col">
+          <Link to={`/profile/${post.user_id}`} className="ml-3 flex flex-col">
             <p className="text-white font-semibold text-sm">{post.first_name} {post.last_name}</p>
             <small className="text-grey text-xs">Published: {post.created_at}</small>
-          </div>
+          </Link>
         </div>
 
         {/* Description */}
@@ -139,7 +139,7 @@ function Post({ post }) {
                 <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
               </div>
               <div className="ml-3 flex flex-col">
-                <p className="text-white font-semibold text-sm">{comment.first_name} {comment.last_name}</p>
+                <Link to={`/profile/${comment.user_id}`} className="text-white font-semibold text-sm">{comment.first_name} {comment.last_name}</Link>
                 <small className="text-grey text-[9px]">Published: {post.created_at}</small>
                 <p className="text-grey font-semibold text-xs mt-2">{comment.description}</p>
               </div>
@@ -168,7 +168,7 @@ function Post({ post }) {
                   <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
                 </div>
                 <div className="ml-3">
-                  <p className="text-black font-semibold text-sm">{comment.first_name} {comment.last_name}</p>
+                  <Link to={`/profile/${comment.user_id}`} className="text-black font-semibold text-sm">{comment.first_name} {comment.last_name}</Link>
                   <small className="text-grey text-xs">Published: {post.created_at}</small>
                   <p className="text-gray-700 text-sm">{comment.description}</p>
                 </div>

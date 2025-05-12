@@ -13,12 +13,25 @@ import { BiSolidParty } from "react-icons/bi";
 
 
 function Header() {
-  const [profile,setProfile]=useState(true);
-
+  const [user,setUser]=useState([]);
+    useEffect(() => {
+          const fetchPosts = async () => {
+              try {
+                  const response = await axiosInstance.get('test');
+                  setUser(response.data);
+              } catch (error) {
+                  console.error('Upload error:', error);
+              }
+          };
+  
+          fetchPosts();
+      }, []);
 
   return (
-    <div className='flex h-[4%] justify-between items-center '>
-        <h1 className='text-brown font-bold text-center'>Aurax.</h1>
+    <div className='flex  justify-between items-center '>
+        <div className='lg:w-[70px] lg:h-[80px] w-[50px] h-[60px] '>
+            <img src="/assets/ourlogo.png" alt="" className='object-cover w-full h-full'/>
+        </div>
         <div className='flex w-[60%] justify-between xl:w-[20%]'>
             {/* Using NavLink for active link styling */}
             <NavLink 
@@ -46,8 +59,8 @@ function Header() {
               <LuShoppingCart />
             </NavLink>
             {
-              profile && <NavLink 
-              to="/Profile" 
+              <NavLink 
+              to={`/profile/${user.user_id}`}
               className={({ isActive }) => 
                 isActive ? 'text-brown text-xl' : 'text-white text-xl hover:text-brown transition-transform duration-300'
               }

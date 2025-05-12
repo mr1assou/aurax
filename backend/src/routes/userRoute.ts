@@ -7,5 +7,6 @@ const userRouter = express.Router();
 const controller = new userController(new userService(new userRepo()));
 // endpointes of apis
 userRouter.post("/addUser", controller.addUser.bind(controller));
+userRouter.get("/getUser", controller.getUser.bind(controller));
 
 export default userRouter;

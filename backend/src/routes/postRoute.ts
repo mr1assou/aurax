@@ -14,5 +14,6 @@ postRouter.get("/getPosts",controller.getPosts.bind(controller));
 postRouter.post("/addComment",controller.addComment.bind(controller));
 postRouter.get("/getComments",controller.getComments.bind(controller));
 postRouter.post("/sharePost",controller.sharePost.bind(controller));
+postRouter.get("/getPostsById",controller.getPostsById.bind(controller));
 
 export default postRouter;

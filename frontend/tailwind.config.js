@@ -25,7 +25,8 @@ export default {
       'sm': '580px',
       'lg':'620px',
       'xl':'1000px',
-      'max':'1360px'
+      'max':'1360px',
+      '3xl':'1400px'
     }
   },
   plugins: [],
