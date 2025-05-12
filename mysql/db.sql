@@ -346,7 +346,7 @@ DELIMITER ;
 
 -- ===========================
 -- Procedure: get_user
--- ===========================_
+-- ===========================z
 DELIMITER $$
 
 CREATE PROCEDURE get_user(IN id INT)

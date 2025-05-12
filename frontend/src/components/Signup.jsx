@@ -34,7 +34,7 @@ function Authentication({ setPopUp }) {
     };
     return (
         <div className='relative h-screen  flex justify-center items-center '>
-            <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
+            <img src="/assets/event7.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
 
             <div className='absolute bg-opacity-50 w-[85%] max:w-[30%]  rounded-lg p-5 bg-white mb-10'>
                 <div className='flex justify-between items-center'>
