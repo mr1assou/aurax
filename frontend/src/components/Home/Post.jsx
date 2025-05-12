@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function Post({ post }) {
   const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(300);
+  const [likeCount, setLikeCount] = useState(0);
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comment, setComment] = useState("");
   const [commented, setCommented] = useState(false);
