@@ -9,7 +9,7 @@ import { upload } from '../utils/upload_image';
 const postRouter = express.Router();
 const controller = new PostController(new PostService(new PostRepo()));
 // endpointes of apis
-postRouter.post("/addPost",upload.single('image'),controller.addPost.bind(controller));
+postRouter.post("/addPost",upload.single('media'),controller.addPost.bind(controller));
 postRouter.get("/getPosts",controller.getPosts.bind(controller));
 postRouter.post("/addComment",controller.addComment.bind(controller));
 postRouter.get("/getComments",controller.getComments.bind(controller));

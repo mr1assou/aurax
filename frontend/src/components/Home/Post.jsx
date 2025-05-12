@@ -16,6 +16,10 @@ function Post({ post }) {
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // Determine if the media is a video
+  const isVideo = post.path_image && 
+    post.path_image.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i);
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -61,8 +65,11 @@ function Post({ post }) {
     }
   };
 
-  const handleSharePost =async () => {
-    const response = await axiosInstance.post('/sharePost',{path_image:post.path_image,description:post.description});
+  const handleSharePost = async () => {
+    const response = await axiosInstance.post('/sharePost', {
+      path_image: post.path_image,
+      description: post.description
+    });
     setShowShareModal(false);
   };
 
@@ -83,14 +90,24 @@ function Post({ post }) {
         {/* Description */}
         <p className="mt-4 text-white text-xs leading-5 px-5">{post.description}</p>
 
-        {/* Image */}
-        {post.path_image !== "assets/undefined" && (
+        {/* Media Display */}
+        {post.path_image && post.path_image !== "assets/undefined" && (
           <div className="mt-4 h-[500px] lg:w-[70%] w-full px-5">
-            <img
-              src={`${imageLink}/${post.path_image}`}
-              alt="Post"
-              className="rounded-lg w-full h-full object-cover"
-            />
+            {isVideo ? (
+              <video
+                controls
+                className="rounded-lg w-full h-full object-cover"
+              >
+                <source src={`${imageLink}/${post.path_image}`} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <img
+                src={`${imageLink}/${post.path_image}`}
+                alt="Post"
+                className="rounded-lg w-full h-full object-cover"
+              />
+            )}
           </div>
         )}
 
@@ -190,12 +207,22 @@ function Post({ post }) {
           <div className="bg-white rounded-lg p-6 w-[90%] max-w-lg">
             <h2 className="text-lg font-bold text-black mb-4">Share This Post</h2>
             <p className="text-gray-800 mb-4">{post.description}</p>
-            {post.path_image !== "assets/undefined" && (
-              <img
-                src={`${imageLink}/${post.path_image}`}
-                alt="Post"
-                className="rounded-lg w-full max-h-80 object-cover mb-4"
-              />
+            {post.path_image && post.path_image !== "assets/undefined" && (
+              isVideo ? (
+                <video
+                  controls
+                  className="rounded-lg w-full max-h-80 object-cover mb-4"
+                >
+                  <source src={`${imageLink}/${post.path_image}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <img
+                  src={`${imageLink}/${post.path_image}`}
+                  alt="Post"
+                  className="rounded-lg w-full max-h-80 object-cover mb-4"
+                />
+              )
             )}
             <button
               onClick={handleSharePost}
