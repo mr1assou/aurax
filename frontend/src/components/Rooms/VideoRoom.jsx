@@ -125,7 +125,7 @@ export const VideoRoom = () => {
             <RxCross2 className='text-brown text-3xl font-black'/>
           </Link>
         </div>
-        <div className={`mt-5 h-full  max:w-[65%]  flex flex-col max:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
+        <div className={`mt-5 h-full  sm:w-[65%]  flex flex-col sm:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
           {users.map((user, index) => (
             user.staging && <VideoPlayer key={index} user={user} length={count} />
           ))}
