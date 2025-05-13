@@ -38,7 +38,7 @@ function Authentication({ setPopUp }) {
                 <img src="/assets/ourlogo.png" alt="" className='object-cover w-full h-full' />
             </div>
             <img src="/assets/event7.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
-            <div className='absolute bg-opacity-50 w-[85%] max:w-[30%]  rounded-lg p-5 bg-white mb-10'>
+            <div className='absolute bg-opacity-50 w-[85%] lg:w-[30%]  rounded-lg p-5 bg-white mb-10'>
                 <div className='flex justify-between items-center'>
                     <h1 className='text-brown font-bold text-[30px]' style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}>Sign up</h1>
                 </div>
