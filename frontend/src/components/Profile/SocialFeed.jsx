@@ -8,13 +8,13 @@ const SocialFeed = ({setReload}) => {
     const [previewMedia, setPreviewMedia] = useState([]);
     const [files, setFiles] = useState([]);
     const [content, setContent] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false); // New loading state
 
     const handleFileChange = (e) => {
         if (e.target.files) {
             const selectedFiles = Array.from(e.target.files);
             setFiles(prev => [...prev, ...selectedFiles]);
 
-            // Create preview URLs
             const urls = selectedFiles.map(file => URL.createObjectURL(file));
             setPreviewMedia(prev => [...prev, ...urls]);
         }
@@ -27,31 +27,34 @@ const SocialFeed = ({setReload}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (content.trim() === '') {
             alert('Please write something before posting!');
             return;
         }
 
-        const formData = new FormData();
-        formData.append('description', content);
-
-        files.forEach(file => {
-            formData.append('media', file); // Changed from 'image' to 'media'
-        });
-
+        setIsSubmitting(true); // Start loading
+        
         try {
-            await axiosInstance.post('/addPost', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const formData = new FormData();
+            formData.append('description', content);
+            files.forEach(file => formData.append('media', file));
+
+            // Add artificial delay
+            const [response] = await Promise.all([
+                axiosInstance.post('/addPost', formData, {
+                    headers: {'Content-Type': 'multipart/form-data'}
+                }),
+                new Promise(resolve => setTimeout(resolve, 3000)) // 3-second delay
+            ]);
+
             setReload(prev => !prev);
             setContent('');
             setFiles([]);
             setPreviewMedia([]);
         } catch (error) {
             console.error('Upload error:', error);
+        } finally {
+            setIsSubmitting(false); // End loading
         }
     };
 
@@ -72,7 +75,15 @@ const SocialFeed = ({setReload}) => {
                         className="w-full p-0 placeholder-gray-500 resize-none focus:outline-none bg-black text-white min-h-[20px] text-sm lg:text-lg"
                         rows="1"
                         required
+                        disabled={isSubmitting} // Disable during submission
                     />
+
+                    {/* Loading overlay */}
+                    {isSubmitting && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brown"></div>
+                        </div>
+                    )}
 
                     <div className="grid grid-cols-1 gap-2 mt-4">
                         {previewMedia.map((preview, index) => {
@@ -93,12 +104,14 @@ const SocialFeed = ({setReload}) => {
                                             className="w-[70%] h-80 object-cover rounded-lg"
                                         />
                                     )}
-                                    <button
-                                        onClick={() => removeMedia(index)}
-                                        className="absolute top-1 right-1 group-hover:opacity-100 transition-opacity text-brown text-3xl"
-                                    >
-                                        ×
-                                    </button>
+                                    {!isSubmitting && ( // Only show remove button when not submitting
+                                        <button
+                                            onClick={() => removeMedia(index)}
+                                            className="absolute top-1 right-1 group-hover:opacity-100 transition-opacity text-brown text-3xl"
+                                        >
+                                            ×
+                                        </button>
+                                    )}
                                 </div>
                             );
                         })}
@@ -106,7 +119,8 @@ const SocialFeed = ({setReload}) => {
                 </div>
 
                 <div className="flex gap-4 mt-5 items-center pb-4 border-b-1 border-grey">
-                    <label htmlFor="camera" className="cursor-pointer flex items-center hover:text-brown">
+                    {/* Disable buttons during submission */}
+                    <label htmlFor="camera" className={`cursor-pointer flex items-center ${isSubmitting ? 'opacity-50' : 'hover:text-brown'}`}>
                         <FaCamera className='text-brown text-xl' />
                         <input
                             type="file"
@@ -115,10 +129,12 @@ const SocialFeed = ({setReload}) => {
                             capture="environment"
                             className="hidden"
                             onChange={handleFileChange}
+                            disabled={isSubmitting}
                         />
                     </label>
 
-                    <label htmlFor="gallery" className="cursor-pointer flex items-center hover:text-brown">
+                    {/* Repeat for other file inputs */}
+                    <label htmlFor="gallery" className={`cursor-pointer flex items-center ${isSubmitting ? 'opacity-50' : 'hover:text-brown'}`}>
                         <IoImageSharp className='text-brown text-xl' />
                         <input
                             type="file"
@@ -127,10 +143,11 @@ const SocialFeed = ({setReload}) => {
                             multiple
                             className="hidden"
                             onChange={handleFileChange}
+                            disabled={isSubmitting}
                         />
                     </label>
 
-                    <label htmlFor="video" className="cursor-pointer flex items-center hover:text-brown">
+                    <label htmlFor="video" className={`cursor-pointer flex items-center ${isSubmitting ? 'opacity-50' : 'hover:text-brown'}`}>
                         <FaVideo className='text-brown text-xl' />
                         <input
                             type="file"
@@ -138,12 +155,23 @@ const SocialFeed = ({setReload}) => {
                             accept="video/*"
                             className="hidden"
                             onChange={handleFileChange}
+                            disabled={isSubmitting}
                         />
                     </label>
 
-
                     <div className='w-[90%] flex justify-end'>
-                        <button type='submit' className='text-white bg-brown rounded-lg px-5 py-1 '>Post </button>
+                        <button 
+                            type='submit' 
+                            className='text-white bg-brown rounded-lg px-5 py-1 flex items-center gap-2'
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <span className="animate-spin">↻</span>
+                                    Posting...
+                                </>
+                            ) : 'Post'}
+                        </button>
                     </div>
                 </div>
             </form>

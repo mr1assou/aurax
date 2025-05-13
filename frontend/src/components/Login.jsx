@@ -14,9 +14,9 @@ function Login({ popUp, setPopUp, reload, setReload }) {
 
   useEffect(() => {
     // Check cookies
-    const checkUser=async ()=>{
-     const response=await axiosInstance.get('test');
-      if(response.data){
+    const checkUser = async () => {
+      const response = await axiosInstance.get('test');
+      if (response.data) {
         console.log('@@@@@@');
         navigate('/home');
       }
@@ -49,9 +49,12 @@ function Login({ popUp, setPopUp, reload, setReload }) {
   };
   return (
     <div className='relative h-screen  flex justify-center items-center '>
+      <div className='absolute top-7 left-8 lg:w-[70px] lg:h-[80px] w-[50px] h-[60px] z-50'>
+        <img src="/assets/ourlogo.png" alt="" className='object-cover w-full h-full' />
+      </div>
       <img src="/assets/event7.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
 
-      <div className='absolute bg-opacity-50 w-[85%] max:w-[30%]  rounded-lg p-5 bg-white mb-10'>
+      <div className='absolute bg-opacity-50 w-[85%] lg:w-[30%]  rounded-lg p-5 bg-white mb-10'>
         <div className='flex justify-between items-center'>
           <h1 className='text-brown font-bold text-[30px]' style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}>Login</h1>
         </div>

@@ -12,7 +12,7 @@ export default {
 
     },
     colors: {
-      brown:'#b87c4c',
+      brown:'#ff1f2d',
       black: '#000000',
       white: '#FFFFFF',
       blight:'#303030',

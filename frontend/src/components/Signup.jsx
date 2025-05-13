@@ -9,7 +9,7 @@ function Authentication({ setPopUp }) {
     const [signUpCredentials, setSignUpCredentials] = useState({ first_name: "", last_name: "" });
     const [empty, setEmpty] = useState(false);
     const navigate = useNavigate();
-    
+
     const register = async (e) => {
         e.preventDefault();
         if (signUpCredentials.first_name !== "" && signUpCredentials.last_name !== "" && email !== "") {
@@ -34,8 +34,10 @@ function Authentication({ setPopUp }) {
     };
     return (
         <div className='relative h-screen  flex justify-center items-center '>
+            <div className='absolute top-7 left-8 lg:w-[70px] lg:h-[80px] w-[50px] h-[60px] z-50'>
+                <img src="/assets/ourlogo.png" alt="" className='object-cover w-full h-full' />
+            </div>
             <img src="/assets/event7.jpg" alt="Profile" className="w-full h-full object-cover object-top brightness-50" />
-
             <div className='absolute bg-opacity-50 w-[85%] max:w-[30%]  rounded-lg p-5 bg-white mb-10'>
                 <div className='flex justify-between items-center'>
                     <h1 className='text-brown font-bold text-[30px]' style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}>Sign up</h1>
