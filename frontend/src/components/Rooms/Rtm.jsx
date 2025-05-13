@@ -1,3 +1,4 @@
+// Rtm.jsx
 import React, { useEffect, useState, useRef } from 'react'
 import face1 from '/assets/login_image.jpg'
 import { FiSend } from "react-icons/fi";
@@ -7,28 +8,21 @@ import AgoraRTM from 'agora-rtm-sdk'
 import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
 
-
 function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUsers,setReload,reload,users}) {
-
   const [text, setText] = useState('');
   const [channel, setChannel] = useState();
-  // here message of others
   const [messages, setMessages] = useState([]);
   const [mic,setMic]=useState(true);
-
   const uid = String(user_id);
+  
   useEffect(() => {
     const APP_ID = "dca3bcedaaeb4bde9f618461df7f2aff";
     const client = AgoraRTM.createInstance(APP_ID);
   
     const connect = async () => {
-      // Log in to the Agora RTM client
       await client.login({ uid, token: token_rtm });
-  
-      // Create and set up the RTM channel
       const channel = client.createChannel(channel_rtm);
   
-      // Set up event listeners before joining the channel
       channel.on('MemberJoined', (memberId) => {
         if(channel)
           channel.getMembers().then((members)=>{
@@ -43,13 +37,9 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
           })
       });
   
-      // Now join the channel after event listeners are set
       await channel.join();
      
-  
-      // Set up the 'ChannelMessage' event listener to receive messages
       channel.on('ChannelMessage', (message, memberId) => {
-        // send message to other users a user join
         if (message.text.includes('i am user 👏 :')) {
           setMessages((currentMessages) => [
             ...currentMessages,
@@ -71,7 +61,6 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     if(parseInt(user_id) != parseInt(channel_rtm)){
       setMic(false);
     }
-
 
     return () => {
       if (channel) {
@@ -98,16 +87,14 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     greeting();
   }, [channel]);
 
-
-
   const sendMessage = (e) => {
     e.preventDefault();
     if (text === '') return;
-    // we send message and see all message for local user
     channel.sendMessage({ text, type: 'text' })
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text }]);
     setText('');
   }
+
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -117,6 +104,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
       behavior: 'smooth',
     });
   }
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -125,6 +113,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     channel.sendMessage({ text: '👏', type: 'text' })
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text: "👏" }]);
   }
+
   const showUp = (uid) => {
     channel.sendMessage({ text: `↑:${uid}`, type: 'text' })
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text: `↑:${uid}` }]);
@@ -154,16 +143,11 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     }
   }
 
-
   return (
     <div className='absolute left-0 bottom-0 w-full h-[18%] xl:w-[30%] xl:h-[80%] flex flex-col justify-between 
                sm:right-5 sm:bottom-0 sm:left-auto'>
-
-
-      {/* Wrap messages in a fixed-height container */}
-      <div className='h-[300px] xl:h-[90%] relative'> {/* Added relative positioning */}
+      <div className='h-[300px] xl:h-[90%] relative'>
         <div className='absolute inset-0 overflow-y-auto  '>
-
           <div className='p-2 flex flex-col'>
             {messages.map((message, index) => (
               !message.text.includes("↑") && <div className='mt-2' key={index}>
@@ -186,7 +170,6 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
         </div>
       </div>
 
-      {/* Form stays outside the scrollable area */}
       <form className='p-2 flex  gap-2 items-center bg-black' onSubmit={sendMessage}>
         <input
           value={text}
@@ -204,7 +187,6 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
         }
         <FaMicrophoneAltSlash className={`cursor-pointer text-xl ${mic ? 'text-white' : 'text-brown'}`}  onClick={microphone}/>
         <CiHeart className='text-brown text-xl font-black' />
-
       </form>
     </div>
   )
