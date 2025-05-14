@@ -1,24 +1,6 @@
-import React, { useEffect, useState } from "react";
-import event8 from "/assets/image2.jpg";
-import piano from "/assets/login_image.jpg";
-import { IoMdStar } from "react-icons/io";
-import { IoMdStarHalf } from "react-icons/io";
-import axiosInstance from "../../Axios";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 
-function UserDetails({}) {
-  const { id } = useParams();
-  const [user, setUser] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axiosInstance.get("/getUser", {
-        params: { user_id: id },
-      });
-      setUser(response.data[0]);
-    };
-    fetchData();
-  }, []);
-
+export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("posts");
 
   return (
@@ -31,12 +13,8 @@ function UserDetails({}) {
           className="w-24 h-24 rounded-full object-cover border"
         />
         <div>
-          <h2 className="text-2xl font-semibold">
-            {user?.first_name} {user?.last_name}
-          </h2>
-          <p className="text-gray-500 text-sm">
-            {user?.first_name} • Content Creator
-          </p>
+          <h2 className="text-2xl font-semibold">kniza_official</h2>
+          <p className="text-gray-500 text-sm">Kenza A. • Content Creator</p>
           <button className="mt-2 px-4 py-1 border rounded-md font-medium hover:bg-gray-100">
             Follow
           </button>
@@ -70,7 +48,7 @@ function UserDetails({}) {
           rel="noopener noreferrer"
           className="text-blue-500 text-sm mt-1 block"
         >
-          lynk.bio/{user?.first_name}
+          lynk.bio/kniza
         </a>
       </div>
 
@@ -102,5 +80,3 @@ function UserDetails({}) {
     </div>
   );
 }
-
-export default UserDetails;

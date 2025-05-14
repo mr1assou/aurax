@@ -1,17 +1,28 @@
-import React from 'react'
-import Posts from './Posts'
-import Header  from '../Header'
-import SocialFeed from './SocialFeed'
-import { useState } from 'react'
-import Wrapper from './Wrapper'
+import React from "react";
+import Posts from "./Posts";
+import Header from "../Header";
+import SocialFeed from "./SocialFeed";
+import SideBar from "../SideBar";
+import { useState } from "react";
+import Wrapper from "./Wrapper";
+import Widgets from "../Widgets";
+import UserProfile from "../UserProfile";
+import UserDetails from "../Profile/UserDetails";
 function Home() {
-  const [reload,setReload]=useState(false);
+  const [reload, setReload] = useState(false);
   return (
-    <div className='w-full  bg-black py-3 px-2 lg:py-5 lg:px-10 min-h-screen'> 
-      <Header /> 
-      <Wrapper />
+    <div
+      className="text-[#0F1419] min-h-screen   max-w-[1400px] mx-auto
+    flex justify-center"
+    >
+      <SideBar />
+      {/* <Header /> */}
+      {/* <Wrapper />*/}
+      {/* <UserProfile /> */}
+      <UserDetails />
+      <Widgets />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

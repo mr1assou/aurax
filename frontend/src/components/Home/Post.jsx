@@ -1,9 +1,331 @@
-import React, { useEffect, useState } from 'react';
-import { FaRegHeart, FaHeart, FaRegComments, FaRegShareSquare } from 'react-icons/fa';
+// import React, { useEffect, useState } from "react";
+// import {
+//   FaRegHeart,
+//   FaHeart,
+//   FaRegComments,
+//   FaRegShareSquare,
+// } from "react-icons/fa";
+// import { CiLocationArrow1 } from "react-icons/ci";
+// import axiosInstance from "../../Axios";
+// import imageLink from "../ImageLink";
+// import { Link } from "react-router-dom";
+
+// function Post({ post }) {
+//   const [liked, setLiked] = useState(false);
+//   const [likeCount, setLikeCount] = useState(0);
+//   const [showCommentInput, setShowCommentInput] = useState(false);
+//   const [comment, setComment] = useState("");
+//   const [commented, setCommented] = useState(false);
+//   const [allCommentsVisible, setAllCommentsVisible] = useState(false);
+//   const [comments, setComments] = useState([]);
+//   const [showShareModal, setShowShareModal] = useState(false);
+//   const [copied, setCopied] = useState(false);
+
+//   // Determine if the media is a video
+//   const isVideo =
+//     post.path_image && post.path_image.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i);
+
+//   useEffect(() => {
+//     const fetchComments = async () => {
+//       try {
+//         const response = await axiosInstance.get("/getComments", {
+//           params: { post_id: post.post_id },
+//         });
+//         setComments(response.data.data);
+//       } catch (error) {
+//         console.error("Error fetching comments:", error);
+//       }
+//     };
+
+//     fetchComments();
+//   }, [post.post_id]);
+
+//   const toggleLike = () => {
+//     setLiked((prev) => !prev);
+//     setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+//   };
+
+//   const toggleCommentInput = () => {
+//     setShowCommentInput((prev) => !prev);
+//     setCommented((prev) => !prev);
+//   };
+
+//   const handleCommentSubmit = async (e) => {
+//     e.preventDefault();
+//     if (comment.trim()) {
+//       try {
+//         await axiosInstance.post("/addComment", {
+//           post_id: post.post_id,
+//           comment: comment,
+//         });
+//         setComment("");
+//         setShowCommentInput(false);
+//         const response = await axiosInstance.get("/getComments", {
+//           params: { post_id: post.post_id },
+//         });
+//         setComments(response.data.data);
+//       } catch (error) {
+//         console.error("Error submitting comment:", error);
+//       }
+//     }
+//   };
+
+//   const handleSharePost = async () => {
+//     const response = await axiosInstance.post("/sharePost", {
+//       path_image: post.path_image,
+//       description: post.description,
+//     });
+//     setShowShareModal(false);
+//   };
+
+//   return (
+//     <div className="w-full max-w-2xl mx-auto xl:pt-4 shadow-lg bg-black">
+//       <div className="mt-5 border border-grey py-5">
+//         {/* User Info */}
+//         <div className="flex items-center px-5">
+//           <div className="w-10 h-10 rounded-full overflow-hidden">
+//             <img
+//               src="/assets/login_image.jpg"
+//               alt="Profile"
+//               className="w-full h-full object-cover"
+//             />
+//           </div>
+//           <Link to={`/profile/${post.user_id}`} className="ml-3 flex flex-col">
+//             <p className="text-white font-semibold text-sm">
+//               {post.first_name} {post.last_name}
+//             </p>
+//             <small className="text-grey text-xs">
+//               Published: {post.created_at}
+//             </small>
+//           </Link>
+//         </div>
+
+//         {/* Description */}
+//         <p className="mt-4 text-white text-xs leading-5 px-5">
+//           {post.description}
+//         </p>
+
+//         {/* Media Display */}
+//         {post.path_image && post.path_image !== "assets/undefined" && (
+//           <div className="mt-4 h-[500px] lg:w-[70%] w-full px-5">
+//             {isVideo ? (
+//               <video controls className="rounded-lg w-full h-full object-cover">
+//                 <source
+//                   src={`${imageLink}/${post.path_image}`}
+//                   type="video/mp4"
+//                 />
+//                 Your browser does not support the video tag.
+//               </video>
+//             ) : (
+//               <img
+//                 src={`${imageLink}/${post.path_image}`}
+//                 alt="Post"
+//                 className="rounded-lg w-full h-full object-cover"
+//               />
+//             )}
+//           </div>
+//         )}
+
+//         {/* Buttons */}
+//         <div className="mt-3 flex items-center gap-10 p-5">
+//           <div
+//             onClick={toggleLike}
+//             className="cursor-pointer flex items-center gap-2"
+//           >
+//             {liked ? (
+//               <FaHeart className="text-brown xl:text-2xl" />
+//             ) : (
+//               <FaRegHeart className="text-grey xl:text-2xl" />
+//             )}
+//             <p className={`text-sm ${liked ? "text-brown" : "text-grey"}`}>
+//               {likeCount}
+//             </p>
+//           </div>
+
+//           <div
+//             onClick={toggleCommentInput}
+//             className="cursor-pointer flex items-center gap-2"
+//           >
+//             <FaRegComments
+//               className={`xl:text-2xl ${
+//                 commented ? "text-brown" : "text-grey"
+//               }`}
+//             />
+//             <p className="text-grey text-sm">{comments.length}</p>
+//           </div>
+
+//           <div
+//             onClick={() => setShowShareModal(true)}
+//             className="cursor-pointer flex items-center gap-2"
+//           >
+//             <FaRegShareSquare className="text-grey xl:text-2xl" />
+//             <p className="text-grey text-sm">500</p>
+//           </div>
+//         </div>
+
+//         {/* Comment Input */}
+//         {showCommentInput && (
+//           <form
+//             onSubmit={handleCommentSubmit}
+//             className="flex gap-2 items-center p-2"
+//           >
+//             <input
+//               type="text"
+//               value={comment}
+//               onChange={(e) => setComment(e.target.value)}
+//               placeholder="Write a comment..."
+//               className="flex-1 px-3 py-2 rounded bg-black text-white w-[70%] border border-gray-700"
+//             />
+//             <button type="submit" className="text-white px-4 py-2 rounded">
+//               <CiLocationArrow1 className="text-2xl text-brown" />
+//             </button>
+//           </form>
+//         )}
+
+//         {/* Show 2 Comments Only */}
+//         <div className="px-5 space-y-4 mt-5">
+//           {comments.length > 0 &&
+//             comments.slice(0, 2).map((comment) => (
+//               <div key={comment.comment_id} className="flex items-center">
+//                 <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-full overflow-hidden">
+//                   <img
+//                     src="/assets/login_image.jpg"
+//                     alt="Profile"
+//                     className="w-full h-full object-cover"
+//                   />
+//                 </div>
+//                 <div className="ml-3 flex flex-col">
+//                   <Link
+//                     to={`/profile/${comment.user_id}`}
+//                     className="text-white font-semibold text-sm"
+//                   >
+//                     {comment.first_name} {comment.last_name}
+//                   </Link>
+//                   <small className="text-grey text-[9px]">
+//                     Published: {post.created_at}
+//                   </small>
+//                   <p className="text-grey font-semibold text-xs mt-2">
+//                     {comment.description}
+//                   </p>
+//                 </div>
+//               </div>
+//             ))}
+
+//           {comments.length > 2 && (
+//             <button
+//               onClick={() => setAllCommentsVisible(true)}
+//               className="text-sm text-brown underline mt-2"
+//             >
+//               Show all comments
+//             </button>
+//           )}
+//         </div>
+//       </div>
+
+//       {/* Comments Modal */}
+//       {allCommentsVisible && (
+//         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+//           <div className="bg-white rounded-lg p-6 w-[90%] max-w-xl max-h-[80vh] overflow-y-auto">
+//             <h2 className="text-black text-lg font-semibold mb-4">
+//               All Comments
+//             </h2>
+//             {comments.map((comment) => (
+//               <div key={comment.comment_id} className="flex items-center mb-4">
+//                 <div className="w-10 h-10 rounded-full overflow-hidden">
+//                   <img
+//                     src="/assets/login_image.jpg"
+//                     alt="Profile"
+//                     className="w-full h-full object-cover"
+//                   />
+//                 </div>
+//                 <div className="ml-3">
+//                   <Link
+//                     to={`/profile/${comment.user_id}`}
+//                     className="text-black font-semibold text-sm"
+//                   >
+//                     {comment.first_name} {comment.last_name}
+//                   </Link>
+//                   <small className="text-grey text-xs">
+//                     Published: {post.created_at}
+//                   </small>
+//                   <p className="text-gray-700 text-sm">{comment.description}</p>
+//                 </div>
+//               </div>
+//             ))}
+//             <button
+//               onClick={() => setAllCommentsVisible(false)}
+//               className="mt-4 bg-black text-white px-4 py-2 rounded"
+//             >
+//               Close
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Share Modal */}
+//       {showShareModal && (
+//         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+//           <div className="bg-white rounded-lg p-6 w-[90%] max-w-lg">
+//             <h2 className="text-lg font-bold text-black mb-4">
+//               Share This Post
+//             </h2>
+//             <p className="text-gray-800 mb-4">{post.description}</p>
+//             {post.path_image &&
+//               post.path_image !== "assets/undefined" &&
+//               (isVideo ? (
+//                 <video
+//                   controls
+//                   className="rounded-lg w-full max-h-80 object-cover mb-4"
+//                 >
+//                   <source
+//                     src={`${imageLink}/${post.path_image}`}
+//                     type="video/mp4"
+//                   />
+//                   Your browser does not support the video tag.
+//                 </video>
+//               ) : (
+//                 <img
+//                   src={`${imageLink}/${post.path_image}`}
+//                   alt="Post"
+//                   className="rounded-lg w-full max-h-80 object-cover mb-4"
+//                 />
+//               ))}
+//             <button
+//               onClick={handleSharePost}
+//               className="bg-black text-white px-4 py-2 rounded"
+//             >
+//               {copied ? "Link Copied!" : "Share Post"}
+//             </button>
+//             <button
+//               onClick={() => setShowShareModal(false)}
+//               className="ml-4 text-black underline"
+//             >
+//               Cancel
+//             </button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default Post;
+import React, { useState, useEffect } from "react";
+import {
+  FaRegHeart,
+  FaHeart,
+  FaRegComments,
+  FaRegShareSquare,
+} from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
-import axiosInstance from '../../Axios';
-import imageLink from '../ImageLink';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import imageLink from "../ImageLink"; // Keep this if you have static images
+import { formatDistanceToNow, parseISO } from "date-fns";
+import {
+  ArrowUpTrayIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  HeartIcon,
+} from "@heroicons/react/24/outline";
 
 function Post({ post }) {
   const [liked, setLiked] = useState(false);
@@ -16,24 +338,30 @@ function Post({ post }) {
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Determine if the media is a video
-  const isVideo = post.path_image && 
-    post.path_image.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i);
+  // Simulating video check
+  const isVideo =
+    post.path_image && post.path_image.match(/\.(mp4|webm|ogg|mov|avi|wmv)$/i);
 
+  // Use static comments data for testing
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await axiosInstance.get('/getComments', {
-          params: { post_id: post.post_id }
-        });
-        setComments(response.data.data);
-      } catch (error) {
-        console.error("Error fetching comments:", error);
-      }
-    };
-
-    fetchComments();
-  }, [post.post_id]);
+    // Simulate fetching comments
+    setComments([
+      {
+        comment_id: 1,
+        user_id: 1,
+        first_name: "User1",
+        last_name: "Name",
+        description: "Great post!",
+      },
+      {
+        comment_id: 2,
+        user_id: 2,
+        first_name: "User2",
+        last_name: "Name",
+        description: "I love this!",
+      },
+    ]);
+  }, []);
 
   const toggleLike = () => {
     setLiked((prev) => !prev);
@@ -45,60 +373,66 @@ function Post({ post }) {
     setCommented((prev) => !prev);
   };
 
-  const handleCommentSubmit = async (e) => {
+  const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (comment.trim()) {
-      try {
-        await axiosInstance.post('/addComment', {
-          post_id: post.post_id,
-          comment: comment
-        });
-        setComment("");
-        setShowCommentInput(false);
-        const response = await axiosInstance.get('/getComments', {
-          params: { post_id: post.post_id }
-        });
-        setComments(response.data.data);
-      } catch (error) {
-        console.error("Error submitting comment:", error);
-      }
+      setComments([
+        ...comments,
+        { comment_id: comments.length + 1, description: comment },
+      ]);
+      setComment("");
+      setShowCommentInput(false);
     }
   };
 
   const handleSharePost = async () => {
-    const response = await axiosInstance.post('/sharePost', {
-      path_image: post.path_image,
-      description: post.description
-    });
+    // Simulate sharing post
     setShowShareModal(false);
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto xl:pt-4 shadow-lg bg-black">
-      <div className="mt-5 border border-grey py-5">
+    <div className="w-full max-w-2xl mx-auto xl:pt-4 p-4 text-[15px]">
+      <div className="mt-5  py-5">
         {/* User Info */}
-        <div className="flex items-center px-5">
+        <div className="flex items-center space-x-1 px-5 text-[15px] text-[#707E89] space-y-1">
           <div className="w-10 h-10 rounded-full overflow-hidden">
-            <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
+            <img
+              src="/assets/login_image.jpg"
+              alt="Profile pic"
+              className="w-full h-full object-cover"
+              width={46}
+              height={46}
+            />
           </div>
-          <Link to={`/profile/${post.user_id}`} className="ml-3 flex flex-col">
-            <p className="text-white font-semibold text-sm">{post.first_name} {post.last_name}</p>
-            <small className="text-grey text-xs">Published: {post.created_at}</small>
+          <Link
+            to={`/profile/${post.user_id}`}
+            className="ml-3 flex flex-col font-bold text-black space-y-1"
+          >
+            <p className="text-black font-semibold text-sm">
+              {post.first_name} {post.last_name}
+            </p>
+            <small className="text-grey text-xs">
+              {formatDistanceToNow(parseISO(post.created_at), {
+                addSuffix: true,
+              })}
+            </small>
           </Link>
         </div>
 
         {/* Description */}
-        <p className="mt-4 text-white text-xs leading-5 px-5">{post.description}</p>
+        <p className="m-6 text-black lg:text-lg leading-5 px-6">
+          {post.description}
+        </p>
 
         {/* Media Display */}
         {post.path_image && post.path_image !== "assets/undefined" && (
           <div className="mt-4 h-[500px] lg:w-[70%] w-full px-5">
             {isVideo ? (
-              <video
-                controls
-                className="rounded-lg w-full h-full object-cover"
-              >
-                <source src={`${imageLink}/${post.path_image}`} type="video/mp4" />
+              <video controls className="rounded-lg w-full h-full object-cover">
+                <source
+                  src={`${imageLink}/${post.path_image}`}
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
             ) : (
@@ -112,35 +446,52 @@ function Post({ post }) {
         )}
 
         {/* Buttons */}
-        <div className="mt-3 flex items-center gap-10 p-5">
-          <div onClick={toggleLike} className="cursor-pointer flex items-center gap-2">
-            {liked ? <FaHeart className="text-brown xl:text-2xl" /> : <FaRegHeart className="text-grey xl:text-2xl" />}
-            <p className={`text-sm ${liked ? 'text-brown' : 'text-grey'}`}>{likeCount}</p>
+        <div className="ml-16 p-3 flex space-around items-center gap-10">
+          <div
+            onClick={toggleLike}
+            className="cursor-pointer flex items-center gap-2"
+          >
+            {liked ? (
+              <HeartIcon className="text-brown w-[25px] h-[25px] cursor-pointer " />
+            ) : (
+              <HeartIcon className="text-grey w-[25px] h-[25px] cursor-pointer hover:text-red transition" />
+            )}
+            <p className={` text-xs ${liked ? "text-brown" : "text-grey"}`}>
+              {likeCount}
+            </p>
           </div>
 
-          <div onClick={toggleCommentInput} className="cursor-pointer flex items-center gap-2">
-            <FaRegComments className={`xl:text-2xl ${commented ? 'text-brown' : 'text-grey'}`} />
-            <p className="text-grey text-sm">{comments.length}</p>
+          <div
+            onClick={toggleCommentInput}
+            className=" flex items-center gap-2"
+          >
+            <ChatBubbleOvalLeftEllipsisIcon
+              className={` w-[25px] h-[25px] cursor-pointer hover:text-red transition  ${
+                commented ? "text-brown" : "text-grey"
+              }`}
+            />
+            <p className="text-grey text-xs">{comments.length}</p>
           </div>
-
           <div
             onClick={() => setShowShareModal(true)}
             className="cursor-pointer flex items-center gap-2"
           >
-            <FaRegShareSquare className="text-grey xl:text-2xl" />
-            <p className="text-grey text-sm">500</p>
+            <ArrowUpTrayIcon className="text-grey  w-[25px] h-[25px]  hover:text-red transition" />
           </div>
         </div>
 
         {/* Comment Input */}
         {showCommentInput && (
-          <form onSubmit={handleCommentSubmit} className="flex gap-2 items-center p-2">
+          <form
+            onSubmit={handleCommentSubmit}
+            className="flex gap-2 items-center p-2"
+          >
             <input
               type="text"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Write a comment..."
-              className="flex-1 px-3 py-2 rounded bg-black text-white w-[70%] border border-gray-700"
+              className="flex-1 px-3 py-2 rounded text-white w-[70%] border border-gray-700"
             />
             <button type="submit" className="text-white px-4 py-2 rounded">
               <CiLocationArrow1 className="text-2xl text-brown" />
@@ -150,18 +501,34 @@ function Post({ post }) {
 
         {/* Show 2 Comments Only */}
         <div className="px-5 space-y-4 mt-5">
-          {comments.length > 0 && comments.slice(0, 2).map((comment) => (
-            <div key={comment.comment_id} className="flex items-center">
-              <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-full overflow-hidden">
-                <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
+          {comments.length > 0 &&
+            comments.slice(0, 2).map((comment) => (
+              <div key={comment.comment_id} className="flex items-center">
+                <div className="w-7 h-7 lg:w-10 lg:h-10 rounded-full overflow-hidden">
+                  <img
+                    src="/assets/login_image.jpg"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="ml-3 flex flex-col">
+                  <Link
+                    to={`/profile/${comment.user_id}`}
+                    className="text-white font-semibold text-sm"
+                  >
+                    {comment.first_name} {comment.last_name}
+                  </Link>
+                  <small className="text-grey text-xs">
+                    {formatDistanceToNow(parseISO(post.created_at), {
+                      addSuffix: true,
+                    })}
+                  </small>
+                  <p className="text-grey font-semibold text-xs mt-2">
+                    {comment.description}
+                  </p>
+                </div>
               </div>
-              <div className="ml-3 flex flex-col">
-                <Link to={`/profile/${comment.user_id}`} className="text-white font-semibold text-sm">{comment.first_name} {comment.last_name}</Link>
-                <small className="text-grey text-[9px]">Published: {post.created_at}</small>
-                <p className="text-grey font-semibold text-xs mt-2">{comment.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
 
           {comments.length > 2 && (
             <button
@@ -178,25 +545,42 @@ function Post({ post }) {
       {allCommentsVisible && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-[90%] max-w-xl max-h-[80vh] overflow-y-auto">
-            <h2 className="text-black text-lg font-semibold mb-4">All Comments</h2>
+            <h2 className="text-black text-lg font-semibold mb-4">
+              All Comments
+            </h2>
             {comments.map((comment) => (
               <div key={comment.comment_id} className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <img src="/assets/login_image.jpg" alt="Profile" className="w-full h-full object-cover" />
+                  <img
+                    src="/assets/login_image.jpg"
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="ml-3">
-                  <Link to={`/profile/${comment.user_id}`} className="text-black font-semibold text-sm">{comment.first_name} {comment.last_name}</Link>
-                  <small className="text-grey text-xs">Published: {post.created_at}</small>
+                  <Link
+                    to={`/profile/${comment.user_id}`}
+                    className="text-black font-semibold text-sm"
+                  >
+                    {comment.first_name} {comment.last_name}
+                  </Link>
+                  <small className="text-grey text-xs">
+                    {formatDistanceToNow(parseISO(post.created_at), {
+                      addSuffix: true,
+                    })}
+                  </small>
                   <p className="text-gray-700 text-sm">{comment.description}</p>
                 </div>
               </div>
             ))}
-            <button
-              onClick={() => setAllCommentsVisible(false)}
-              className="mt-4 bg-black text-white px-4 py-2 rounded"
-            >
-              Close
-            </button>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setAllCommentsVisible(false)}
+                className="mt-4 bg-red text-white px-4 py-2 rounded-full "
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -205,15 +589,21 @@ function Post({ post }) {
       {showShareModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-[90%] max-w-lg">
-            <h2 className="text-lg font-bold text-black mb-4">Share This Post</h2>
+            <h2 className="text-lg font-bold text-black mb-4">
+              Share This Post
+            </h2>
             <p className="text-gray-800 mb-4">{post.description}</p>
-            {post.path_image && post.path_image !== "assets/undefined" && (
-              isVideo ? (
+            {post.path_image &&
+              post.path_image !== "assets/undefined" &&
+              (isVideo ? (
                 <video
                   controls
                   className="rounded-lg w-full max-h-80 object-cover mb-4"
                 >
-                  <source src={`${imageLink}/${post.path_image}`} type="video/mp4" />
+                  <source
+                    src={`${imageLink}/${post.path_image}`}
+                    type="video/mp4"
+                  />
                   Your browser does not support the video tag.
                 </video>
               ) : (
@@ -222,8 +612,8 @@ function Post({ post }) {
                   alt="Post"
                   className="rounded-lg w-full max-h-80 object-cover mb-4"
                 />
-              )
-            )}
+              ))}
+
             <button
               onClick={handleSharePost}
               className="bg-black text-white px-4 py-2 rounded"
