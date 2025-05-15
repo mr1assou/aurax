@@ -107,7 +107,7 @@ export default function EventsPage() {
     flex justify-center"
     >
       <SideBar />
-      <div className="flex w-full  mx-auto px-4 py-10 min-h-screen text-black">
+      <div className="flex w-full  mx-auto px-4 py-10 min-h-screen text-black ">
         <div className="">
           <div className="flex  mb-8">
             <div className="flex flex-row  gap-4">
@@ -138,7 +138,7 @@ export default function EventsPage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap mt-10 p-4 justify-center">
+          <div className="flex flex-wrap mt-10 justify-center ">
             {filteredEvents.length === 0 && (
               <div className="col-span-full text-center text-gray-400 text-sm">
                 No events found for your selected filters.
@@ -165,7 +165,7 @@ export default function EventsPage() {
               return (
                 <div
                   key={event.id}
-                  className=" rounded-md  transition duration-300 m-6 border w-[300px] overflow-hidden"
+                  className=" rounded-md  transition duration-300 m-6 border w-full sm:w-[300px] overflow-hidden "
                 >
                   <img
                     src={event.image}
@@ -180,7 +180,7 @@ export default function EventsPage() {
                       <button
                         onClick={() => toggleInterest(event.id)}
                         className={`text-sm font-medium h-9  px-3 py-1 rounded-full transition-all w-[150px] duration-200 bg-red ${
-                          isGoing ? "bg-[green] " : " text-balck "
+                          isGoing ? "bg-[#008000] " : " text-black "
                         }`}
                       >
                         {isGoing ? "✔ Going" : "+ Interested"}
