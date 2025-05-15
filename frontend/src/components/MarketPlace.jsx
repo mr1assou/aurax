@@ -18,7 +18,7 @@ const mockEvents = [
     time: "8:00 PM",
     image: "/assets/p1.jpg",
     description:
-      "A cozy rooftop night filled with indie rock vibes and acoustic performances.",
+      "A cozy rooftop night filled with indie rock vibes and acoustic performances",
     tags: ["Indie", "Live", "Casablanca"],
     initialGoing: 64,
     price:300
