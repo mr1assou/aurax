@@ -17,7 +17,7 @@ function AddRoom({ setPopUp, setRoomForm }) {
 
 
     return (
-        <button className='text-white border-2 border-grey px-2 py-2 mt-5  font-bold xl:py-3 xl:px-5 xl:text-sm' onClick={createRoom}>
+        <button className='text-black border-2 border-brown px-2 py-2 mt-5  font-bold xl:py-3 xl:px-5 xl:text-sm' onClick={createRoom}>
             create a room</button>
     )
 }

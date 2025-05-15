@@ -7,7 +7,7 @@ function Wrapper() {
   return (
     <div>
       <SocialFeed setReload={setReload} />
-      <Posts reload={false} />
+      <Posts reload={reload} />
     </div>
   );
 }

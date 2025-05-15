@@ -9,7 +9,6 @@ import Widgets from "../Widgets";
 import UserProfile from "../UserProfile";
 import UserDetails from "../Profile/UserDetails";
 function Home() {
-  const [reload, setReload] = useState(false);
   return (
     <div
       className="text-[#0F1419] min-h-screen   max-w-[1400px] mx-auto
@@ -17,9 +16,9 @@ function Home() {
     >
       <SideBar />
       {/* <Header /> */}
-      {/* <Wrapper />*/}
+      <Wrapper />
       {/* <UserProfile /> */}
-      <UserDetails />
+      {/* <UserDetails /> */}
       <Widgets />
     </div>
   );

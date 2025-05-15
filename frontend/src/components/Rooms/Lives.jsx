@@ -63,8 +63,8 @@ function Live({ setPopUp , reload}) {
                             </div>
                         </div>
                         <div className='w-[60%]  ml-2 flex flex-col'>
-                            <p className='text-lg text-white  w-full truncate font-bold'>{room.description}</p>
-                            <p className='text-xs text-white  w-full truncate font-bold opacity-40 mt-2'>{room.first_name} {room.last_name}</p>
+                            <p className='text-lg text-black  w-full truncate font-bold'>{room.description}</p>
+                            <p className='text-xs text-black  w-full truncate font-bold opacity-40 mt-2'>{room.first_name} {room.last_name}</p>
                         </div>
                         <div className='flex justify-center w-[30%] xs:justify-end'>
                             <div className='flex items-center'>

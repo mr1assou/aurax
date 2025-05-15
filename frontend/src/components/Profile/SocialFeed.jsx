@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
-import { IoImageSharp } from "react-icons/io5";
-import { MdOutlineGif } from "react-icons/md";
 import { FaCamera, FaVideo } from "react-icons/fa";
 import axiosInstance from "../../Axios";
+import { MapIcon, PhotoIcon } from "@heroicons/react/24/outline";
 
 const SocialFeed = ({ setReload }) => {
   const [previewMedia, setPreviewMedia] = useState([]);
@@ -31,9 +30,8 @@ const SocialFeed = ({ setReload }) => {
       alert("Please write something before posting!");
       return;
     }
-
     setIsSubmitting(true); // Start loading
-
+    
     try {
       const formData = new FormData();
       formData.append("description", content);
@@ -59,20 +57,14 @@ const SocialFeed = ({ setReload }) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-black border-grey border-1">
-      <div className="flex border-b border-gray-200">
-        <button className="py-4 font-medium text-brown border-b-2 border-brown text-sm lg:text-xl">
-          For you
-        </button>
-      </div>
-
+    <div className="max-w-2xl mx-auto  flex-grow p-4">
       <form action="" className="relative" onSubmit={handleSubmit}>
-        <div className="mt-5 border-b border-grey">
+        <div className="mt-5  w-full">
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Post now"
-            className="w-full p-0 placeholder-gray-500 resize-none focus:outline-none bg-black text-white min-h-[20px] text-sm lg:text-lg"
+            placeholder="What's happening?"
+            className="w-full  resize-none outline-none min-h-[50px]  text-lg"
             rows="1"
             required
             disabled={isSubmitting} // Disable during submission
@@ -80,8 +72,8 @@ const SocialFeed = ({ setReload }) => {
 
           {/* Loading overlay */}
           {isSubmitting && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brown"></div>
+            <div className="absolute inset-0  flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-grey"></div>
             </div>
           )}
 
@@ -121,7 +113,7 @@ const SocialFeed = ({ setReload }) => {
           </div>
         </div>
 
-        <div className="flex gap-4 mt-5 items-center pb-4 border-b-1 border-grey">
+        <div className="flex justify-between space-x-4 pt-5">
           {/* Disable buttons during submission */}
           <label
             htmlFor="camera"
@@ -148,7 +140,7 @@ const SocialFeed = ({ setReload }) => {
               isSubmitting ? "opacity-50" : "hover:text-brown"
             }`}
           >
-            <IoImageSharp className="text-brown text-xl" />
+            <PhotoIcon className="text-brown text-xl w-[22px] h-[22px]" />
             <input
               type="file"
               id="gallery"
@@ -180,7 +172,7 @@ const SocialFeed = ({ setReload }) => {
           <div className="w-[90%] flex justify-end">
             <button
               type="submit"
-              className="text-white bg-brown rounded-lg px-5 py-1 flex items-center gap-2"
+              className="text-white bg-brown w-[80px] h-[36px] rounded-full text-sm cursor-pointer"
               disabled={isSubmitting}
             >
               {isSubmitting ? (

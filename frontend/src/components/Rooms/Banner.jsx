@@ -36,7 +36,7 @@ const Banner= () => {
   }, [moveToNextSlide]);
 
   return (
-    <div className="relative w-full h-32 xs:h-64 max:h-[500px] 3xl:[700px] overflow-hidden mt-5 ">
+    <div className="relative w-full h-32 xs:h-64 max:h-[400px] 3xl:[700px] overflow-hidden mt-5 ">
       <div
         className={`flex h-full ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
         style={{

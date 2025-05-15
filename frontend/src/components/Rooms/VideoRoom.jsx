@@ -8,6 +8,7 @@ import { RxCross2 } from "react-icons/rx";
 import { Link, NavLink } from 'react-router-dom';
 import Rtm from './Rtm';
 import Header from '../Header';
+import SideBar from '../SideBar';
 
 const client = AgoraRTC.createClient({
   mode: 'rtc',
@@ -113,9 +114,12 @@ export const VideoRoom = () => {
   const count = users.filter(item => item.staging == true).length;
 
   return (
-    <div className='w-full  bg-black py-3 px-2 lg:py-5 lg:px-10 min-h-screen'>
-      <Header />
-      <div className='mt-2  h-[90vh]'>
+    <div
+      className="text-[#0F1419] min-h-screen   max-w-[1400px] mx-auto
+    flex justify-center"
+    >
+      <SideBar />
+      <div className='mt-2  h-[90vh] w-[80%]'>
         <div className='flex justify-between mt-4'>
           <div className='flex justify-end items-center gap-1'>
             <p className='text-sm text-brown font-bold'>{totalUsers}</p>
@@ -125,7 +129,7 @@ export const VideoRoom = () => {
             <RxCross2 className='text-brown text-3xl font-black'/>
           </Link>
         </div>
-        <div className={`mt-5 h-full  sm:w-[65%]  flex flex-col sm:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
+        <div className={`mt-5 h-full  sm:w-[100%]  flex flex-col sm:flex-row  gap-2 ${count > 2 ? 'flex-wrap' : ''}`}>
           {users.map((user, index) => (
             user.staging && <VideoPlayer key={index} user={user} length={count} />
           ))}

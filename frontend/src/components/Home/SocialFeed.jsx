@@ -30,9 +30,8 @@ const SocialFeed = ({ setReload }) => {
       alert("Please write something before posting!");
       return;
     }
-
     setIsSubmitting(true); // Start loading
-
+    
     try {
       const formData = new FormData();
       formData.append("description", content);
@@ -171,14 +170,6 @@ const SocialFeed = ({ setReload }) => {
               onChange={handleFileChange}
               disabled={isSubmitting}
             />
-          </label>
-          <label
-            htmlFor=""
-            className={`cursor-pointer flex items-center ${
-              isSubmitting ? "opacity-50" : "hover:text-brown"
-            }`}
-          >
-            <MapIcon className="text-brown text-xl w-[22px] h-[22px]" />
           </label>
 
           <div className="w-[90%] flex justify-end">

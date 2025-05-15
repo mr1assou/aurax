@@ -8,37 +8,39 @@ import AgoraRTM from 'agora-rtm-sdk'
 import { FaMicrophoneAltSlash } from "react-icons/fa";
 import { FaHandsClapping } from "react-icons/fa6";
 
-function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUsers,setReload,reload,users}) {
+function Rtm({ setUsers, user_id, channel_rtm, token_rtm, localTracks, setTotalUsers, setReload, reload, users }) {
   const [text, setText] = useState('');
   const [channel, setChannel] = useState();
   const [messages, setMessages] = useState([]);
-  const [mic,setMic]=useState(true);
+  const [mic, setMic] = useState(true);
+  const [heartCount, setHeartCount] = useState(0);
+
   const uid = String(user_id);
-  
+
   useEffect(() => {
     const APP_ID = "dca3bcedaaeb4bde9f618461df7f2aff";
     const client = AgoraRTM.createInstance(APP_ID);
-  
+
     const connect = async () => {
       await client.login({ uid, token: token_rtm });
       const channel = client.createChannel(channel_rtm);
-  
+
       channel.on('MemberJoined', (memberId) => {
-        if(channel)
-          channel.getMembers().then((members)=>{
+        if (channel)
+          channel.getMembers().then((members) => {
             setTotalUsers(members.length);
           })
       });
-  
+
       channel.on('MemberLeft', (memberId) => {
-        if(channel)
-          channel.getMembers().then((members)=>{
+        if (channel)
+          channel.getMembers().then((members) => {
             setTotalUsers(members.length);
           })
       });
-  
+
       await channel.join();
-     
+
       channel.on('ChannelMessage', (message, memberId) => {
         if (message.text.includes('i am user 👏 :')) {
           setMessages((currentMessages) => [
@@ -52,13 +54,13 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
           setReload(true);
         }
       });
-  
+
       setChannel(channel);
     };
-  
+
     connect();
-  
-    if(parseInt(user_id) != parseInt(channel_rtm)){
+
+    if (parseInt(user_id) != parseInt(channel_rtm)) {
       setMic(false);
     }
 
@@ -69,16 +71,16 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
       client.logout();
     };
   }, []);
-  
-  if(channel){
-    channel.getMembers().then((members)=>{
+
+  if (channel) {
+    channel.getMembers().then((members) => {
       setTotalUsers(members.length);
     })
   }
 
   useEffect(() => {
     const greeting = () => {
-      if(channel){
+      if (channel) {
         channel.sendMessage({ text: `i am user 👏 :${user_id}`, type: 'text' });
         setMessages(currentMessages => [...currentMessages, { uid: user_id, text: `i am user 👏 :${user_id}` }]);
       }
@@ -94,6 +96,9 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     setMessages(currentMessages => [...currentMessages, { uid: user_id, text }]);
     setText('');
   }
+  const handleHeartClick = () => {
+    setHeartCount((prev) => prev + 1);
+  };
 
   const messagesEndRef = useRef(null);
 
@@ -126,27 +131,27 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
     );
   }
 
-  const microphone=()=>{
-    let count=0;
+  const microphone = () => {
+    let count = 0;
     users.forEach(user => {
-      if (user.uid==user_id && user.staging === true) {
+      if (user.uid == user_id && user.staging === true) {
         count++;
       }
     });
-    if(mic){
+    if (mic) {
       localTracks[0].setEnabled(false);
       setMic(false);
     }
-    else if(!mic && count){
+    else if (!mic && count) {
       localTracks[0].setEnabled(true);
       setMic(true);
     }
   }
 
   return (
-    <div className='absolute left-0 bottom-0 w-full h-[18%] xl:w-[30%] xl:h-[80%] flex flex-col justify-between 
-               sm:right-5 sm:bottom-0 sm:left-auto'>
-      <div className='h-[300px] xl:h-[90%] relative'>
+    <div className=' h-[18%] sm:w-[40%] sm:h-[90%] flex flex-col justify-between
+                sm:left-auto '>
+      <div className='h-[300px] xl:h-[90%] relative w-full'>
         <div className='absolute inset-0 overflow-y-auto  '>
           <div className='p-2 flex flex-col'>
             {messages.map((message, index) => (
@@ -159,7 +164,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
                     You
                   </p>
                   {
-                    message.text === "👏" && user_id == channel_rtm && <FaHandsClapping className='text-white' onClick={() => showUp(message.uid)} />
+                    message.text === "👏" && user_id == channel_rtm && <FaHandsClapping className='text-brown' onClick={() => showUp(message.uid)} />
                   }
                 </div>
                 <p className='ml-12 text-white text-[8px] bg-blight px-2 py-2 rounded-lg font-bold'>{message.text}</p>
@@ -170,7 +175,7 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
         </div>
       </div>
 
-      <form className='p-2 flex  gap-2 items-center bg-black' onSubmit={sendMessage}>
+      <form className='p-2 flex  gap-2 items-center  w-full' onSubmit={sendMessage}>
         <input
           value={text}
           type="text"
@@ -183,10 +188,14 @@ function Rtm({ setUsers, user_id, channel_rtm, token_rtm ,localTracks,setTotalUs
         </button>
         {
           user_id != channel_rtm
-          && <FaChildReaching className='text-white text-xl' onClick={stagingRequest} />
+          && <FaChildReaching className='text-brown text-xl' onClick={stagingRequest} />
         }
-        <FaMicrophoneAltSlash className={`cursor-pointer text-xl ${mic ? 'text-white' : 'text-brown'}`}  onClick={microphone}/>
-        <CiHeart className='text-brown text-xl font-black' />
+        <FaMicrophoneAltSlash className={`cursor-pointer text-xl ${mic ? 'text-brown' : 'text-black'}`} onClick={microphone} />
+          <div className="flex items-center gap-1 cursor-pointer" onClick={handleHeartClick}>
+          <CiHeart className='text-brown text-xl font-bold' />
+          <span className="text-brown text-xs font-bold">{heartCount}</span>
+        </div>
+
       </form>
     </div>
   )

@@ -22,16 +22,16 @@ function UserDetails({}) {
   const [activeTab, setActiveTab] = useState("posts");
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 px-4">
+    <div className="w-[70%] mx-auto mt-10 px-4 ">
       {/* Header */}
       <div className="flex items-center gap-6">
         <img
-          src="https://placekitten.com/150/150"
+          src="/assets/image2.jpg"
           alt="profile"
           className="w-24 h-24 rounded-full object-cover border"
         />
         <div>
-          <h2 className="text-2xl font-semibold">
+          <h2 className="text-2xl font-semibold bg-red">
             {user?.first_name} {user?.last_name}
           </h2>
           <p className="text-gray-500 text-sm">

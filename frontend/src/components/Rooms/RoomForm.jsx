@@ -37,13 +37,13 @@ function RoomForm({ roomForm, setRoomForm }) {
     return (
         <>
             {
-                roomForm && <div class="fixed top-0 right-0 w-screen h-screen bg-black z-10 bg-opacity-90 flex justify-center items-center">
+                roomForm && <div class="fixed top-0 right-0 w-screen h-screen bg-white z-50 bg-opacity-90 flex justify-center items-center">
                     <div class="bg-black bg-opacity-70 w-[80%] max:w-[30%] mb-20 h-80 p-5">
                         <div class="flex justify-between items-center">
                             <h1 class="text-brown font-bold text-xl">Create Room </h1>
                             <span class="text-white font-black cursor-pointer" onClick={() => setRoomForm(false)}>&#x2715;</span>
                         </div>
-                        <form class="p-2 flex flex-col justify-between gap-2 items-center bg-black mt-5" >
+                        <form class="p-2 flex flex-col justify-between gap-2 items-center  mt-5" >
                             <div class="w-full">
                                 <p class="text-white">Description:</p>
                                 <input
