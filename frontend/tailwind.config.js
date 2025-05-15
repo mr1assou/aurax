@@ -18,7 +18,8 @@ export default {
       blight:'#303030',
       grey:'#b0a8b9',
       greylight:'#b0a8b9',
-      red:'#FF0000'
+      red:'#FF0000',
+      green:'#008000'
     },
     screens: {
       'xs': '500px',

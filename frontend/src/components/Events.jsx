@@ -155,10 +155,10 @@ export default function EventsPage() {
               const countdown =
                 isGoing && timeRemaining > 0
                   ? `${Math.floor(
-                      timeRemaining / (1000 * 60 * 60 * 24)
-                    )}d ${Math.floor(
-                      (timeRemaining / (1000 * 60 * 60)) % 24
-                    )}h ${Math.floor((timeRemaining / (1000 * 60)) % 60)}m`
+                    timeRemaining / (1000 * 60 * 60 * 24)
+                  )}d ${Math.floor(
+                    (timeRemaining / (1000 * 60 * 60)) % 24
+                  )}h ${Math.floor((timeRemaining / (1000 * 60)) % 60)}m`
                   : null;
               const goingCount = event.initialGoing + (isGoing ? 1 : 0);
 
@@ -172,19 +172,19 @@ export default function EventsPage() {
                     alt={event.title}
                     className="w-full h-48 object-cover"
                   />
-                  <div className="p-5">
+                  <div className="p-5 ">
                     <div className="flex items-center justify-between mb-2">
-                      <h2 className="text-lg font-semibold text-white">
+                      <h2 className="text-md font-semibold text-black ">
                         {event.title}
                       </h2>
                       <button
                         onClick={() => toggleInterest(event.id)}
-                        className={`text-sm font-medium h-9  px-3 py-1 rounded-full transition-all w-[150px] duration-200 bg-red ${
-                          isGoing ? "bg-[#008000] " : " text-black "
-                        }`}
+                        className={`text-sm font-medium h-9 px-3 py-1 rounded-full transition-all w-[150px] duration-200 ${isGoing ? "bg-green text-white" : "bg-red text-black"
+                          }`}
                       >
                         {isGoing ? "✔ Going" : "+ Interested"}
                       </button>
+
                     </div>
 
                     <div className="flex flex-wrap items-center text-xs text-gray-400 gap-4 mb-3">
