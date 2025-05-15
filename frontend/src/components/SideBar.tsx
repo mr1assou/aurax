@@ -6,6 +6,17 @@ import { CgProfile } from "react-icons/cg";
 import { BiSolidParty } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import axiosInstance from "../Axios";
+import {
+  BellIcon,
+  BookmarkIcon,
+  EllipsisHorizontalCircleIcon,
+  HashtagIcon,
+  HomeIcon,
+  InboxIcon,
+  ShoppingCartIcon,
+  TvIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 
 function SideBar() {
   const [showNav, setShowNav] = React.useState(true);
@@ -25,21 +36,20 @@ function SideBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [user,setUser]:any=useState([]);
-      useEffect(() => {
-            const fetchPosts = async () => {
-                try {
-                    const response = await axiosInstance.get('test');
-                    setUser(response.data);
-                } catch (error) {
-                    console.error('Upload error:', error);
-                }
-            };
-    
-            fetchPosts();
-        }, []);
-  
-          
+  const [user, setUser]: any = useState([]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await axiosInstance.get("test");
+        setUser(response.data);
+      } catch (error) {
+        console.error("Upload error:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <nav
       className={`fixed bottom-0 left-0 w-full bg-white flex justify-center items-center h-14 z-50
@@ -53,11 +63,19 @@ function SideBar() {
           <img src="/assets/ourlogo.png" width={50} height={50} alt="ourlogo" />
         </div>
         <ul className="flex m-0 p-0 gap-6 sm:flex-col sm:gap-4 ">
-          <SideBarLink text="Home" Icon={FaHome} to="/home" />
-          <SideBarLink text="Lives" Icon={MdOutlineOndemandVideo} to="/rooms" />
-          <SideBarLink text="Marketplace" Icon={LuShoppingCart} to="/marketplace" />
-          <SideBarLink text="Profile" Icon={CgProfile}  to={`/profile/${user.user_id}`} />
+          <SideBarLink text="Home" Icon={HomeIcon} to="/home" />
+          <SideBarLink text="Lives" Icon={TvIcon} to="/rooms" />
+          <SideBarLink
+            text="Marketplace"
+            Icon={ShoppingCartIcon}
+            to="/marketplace"
+          />
           <SideBarLink text="Events" Icon={BiSolidParty} to="/events" />
+          <SideBarLink
+            text="Profile"
+            Icon={UserIcon}
+            to={`/profile/${user.user_id}`}
+          />
         </ul>
       </div>
     </nav>
@@ -77,7 +95,7 @@ function SideBarLink({ text, Icon, to }: SideBarLinkProps) {
     <li className="flex items-center text-xl mb-2 space-x-3 p-2.5">
       <NavLink
         to={to}
-        className={({ isActive }) => 
+        className={({ isActive }) =>
           `flex items-center space-x-3 ${
             isActive ? "text-brown" : "text-gray-500"
           } hover:text-brown/80 transition-colors`
